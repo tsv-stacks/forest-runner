@@ -1,3 +1,5 @@
+import { Idle, Running } from "./playerStates.js";
+
 class Player {
   constructor(game) {
     this.game = game;
@@ -13,10 +15,18 @@ class Player {
     this.vy = 0;
     this.weight = 1;
     this.image = document.getElementById("player");
+    this.frameX = 0;
+    this.frameY = 0;
     this.speed = 0;
     this.maxSpeed = 3;
+
+    this.states = [new Idle(this), new Running(this)];
+    this.currentState = this.states[0];
+    this.currentState.enter();
   }
   update(input) {
+    this.currentState.handleInput(input);
+
     this.x += this.speed;
     // horizontal movement
     if (input.includes("ArrowRight")) {
@@ -49,8 +59,8 @@ class Player {
   draw(context) {
     context.drawImage(
       this.image,
-      0,
-      0,
+      this.frameX * this.width,
+      this.frameY * this.height,
       this.width,
       this.height,
       this.x,
@@ -61,6 +71,11 @@ class Player {
   }
   onGround() {
     return this.y >= this.game.height - this.viewHeight;
+  }
+
+  setState(state) {
+    this.currentState = this.states[state];
+    this.currentState.enter();
   }
 }
 
