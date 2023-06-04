@@ -20,7 +20,9 @@ export class Idle extends State {
     this.player = player;
   }
   enter() {
+    this.player.frameX = 0;
     this.player.frameY = 12;
+    this.player.maxFrame = 3;
   }
   handleInput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
@@ -39,7 +41,9 @@ export class Crouch extends State {
     this.player = player;
   }
   enter() {
+    this.player.frameX = 0;
     this.player.frameY = 7;
+    this.player.maxFrame = 3;
   }
   handleInput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
@@ -56,13 +60,17 @@ export class Running extends State {
     this.player = player;
   }
   enter() {
-    this.player.frameY = 11;
+    this.player.frameX = 0;
+    this.player.frameY = 16;
+    this.player.maxFrame = 5;
   }
   handleInput(input) {
     if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP);
     } else if (input.includes("ArrowDown")) {
       this.player.setState(states.SLIDE);
+    } else if (!input.includes("ArrowLeft") && !input.includes("ArrowRight")) {
+      this.player.setState(states.IDLE);
     }
   }
 }
@@ -74,8 +82,10 @@ export class Jump extends State {
   }
   enter() {
     if (this.player.onGround()) {
+      this.player.frameX = 0;
       this.player.vy -= 20;
       this.player.frameY = 14;
+      this.player.maxFrame = 3;
     }
   }
   handleInput(input) {
@@ -94,7 +104,9 @@ export class Fall extends State {
     if (this.player.onGround()) {
       this.vy -= 25;
     }
+    this.player.frameX = 0;
     this.player.frameY = 10;
+    this.player.maxFrame = 1;
   }
   handleInput(input) {
     if (this.player.onGround()) {
@@ -109,7 +121,9 @@ export class Slide extends State {
     this.player = player;
   }
   enter() {
-    this.player.frameY = 16;
+    this.player.frameX = 0;
+    this.player.frameY = 17;
+    this.player.maxFrame = 2;
   }
   handleInput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
