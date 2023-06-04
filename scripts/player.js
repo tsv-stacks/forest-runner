@@ -1,4 +1,4 @@
-import { Idle, Running } from "./playerStates.js";
+import { Crouch, Idle, Running } from "./playerStates.js";
 
 class Player {
   constructor(game) {
@@ -20,7 +20,7 @@ class Player {
     this.speed = 0;
     this.maxSpeed = 3;
 
-    this.states = [new Idle(this), new Running(this)];
+    this.states = [new Idle(this), new Running(this), new Crouch(this)];
     this.currentState = this.states[0];
     this.currentState.enter();
   }

@@ -1,7 +1,7 @@
 const states = {
   IDLE: 0,
   RUNNING: 1,
-  JUMPING: 2,
+  CROUCH: 2,
   ROLL: 10,
 };
 
@@ -17,7 +17,24 @@ export class Idle extends State {
     this.player = player;
   }
   enter() {
-    this.player.frameY = 8;
+    this.player.frameY = 12;
+  }
+  handleInput(input) {
+    if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
+      this.player.setState(states.RUNNING);
+    } else if (input.includes("ArrowDown")) {
+      this.player.setState(states.CROUCH);
+    }
+  }
+}
+
+export class Crouch extends State {
+  constructor(player) {
+    super("CROUCH");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameY = 7;
   }
   handleInput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
@@ -32,7 +49,7 @@ export class Running extends State {
     this.player = player;
   }
   enter() {
-    this.player.frameY = 7;
+    this.player.frameY = 11;
   }
   handleInput(input) {
     if (input.includes("ArrowDown")) {
