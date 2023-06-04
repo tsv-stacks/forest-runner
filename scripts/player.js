@@ -1,4 +1,12 @@
-import { Crouch, Fall, Idle, Jump, Running, Slide } from "./playerStates.js";
+import {
+  Crouch,
+  Fall,
+  Idle,
+  Jump,
+  Running,
+  Slide,
+  SlideToStand,
+} from "./playerStates.js";
 
 class Player {
   constructor(game) {
@@ -31,6 +39,7 @@ class Player {
       new Jump(this),
       new Fall(this),
       new Slide(this),
+      new SlideToStand(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();

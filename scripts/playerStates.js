@@ -5,6 +5,7 @@ const states = {
   JUMP: 3,
   FALL: 4,
   SLIDE: 5,
+  SLIDETOSTAND: 6,
   ROLL: 10,
 };
 
@@ -126,15 +127,47 @@ export class Slide extends State {
     this.player.maxFrame = 1;
   }
   handleInput(input) {
+    // if (
+    //   (input.includes("ArrowLeft") || input.includes("ArrowRight")) &&
+    //   !input.includes("ArrowDown")
+    // ) {
+    //   this.player.setState(states.RUNNING);
+    // } else if (input.includes("ArrowUp")) {
+    //   this.player.setState(states.JUMP);
+    // } else if (!input.includes("ArrowDown")) {
+    //   this.player.setState(states.IDLE);
+    // }
+
     if (
       (input.includes("ArrowLeft") || input.includes("ArrowRight")) &&
       !input.includes("ArrowDown")
     ) {
-      this.player.setState(states.RUNNING);
+      this.player.setState(states.SLIDETOSTAND);
     } else if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP);
     } else if (!input.includes("ArrowDown")) {
-      this.player.setState(states.IDLE);
+      this.player.setState(states.SLIDETOSTAND);
+    }
+  }
+}
+
+export class SlideToStand extends State {
+  constructor(player) {
+    super("SLIDETOSTAND");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = 16;
+    this.player.maxFrame = 2;
+  }
+  handleInput(input) {
+    if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
+      this.player.setState(states.RUNNING);
+    } else if (input.includes("ArrowDown")) {
+      this.player.setState(states.CROUCH);
+    } else if (input.includes("ArrowUp")) {
+      this.player.setState(states.JUMP);
     }
   }
 }
