@@ -67,7 +67,7 @@ export class Running extends State {
   handleInput(input) {
     if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP);
-    } else if (input.includes("ArrowDown")) {
+    } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
       this.player.setState(states.SLIDE);
     } else if (!input.includes("ArrowLeft") && !input.includes("ArrowRight")) {
       this.player.setState(states.IDLE);
@@ -123,15 +123,18 @@ export class Slide extends State {
   enter() {
     this.player.frameX = 0;
     this.player.frameY = 17;
-    this.player.maxFrame = 2;
+    this.player.maxFrame = 1;
   }
   handleInput(input) {
-    if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
+    if (
+      (input.includes("ArrowLeft") || input.includes("ArrowRight")) &&
+      !input.includes("ArrowDown")
+    ) {
       this.player.setState(states.RUNNING);
-    } else if (input.includes("ArrowDown")) {
-      this.player.setState(states.CROUCH);
     } else if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP);
+    } else if (!input.includes("ArrowDown")) {
+      this.player.setState(states.IDLE);
     }
   }
 }
