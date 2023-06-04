@@ -1,4 +1,4 @@
-import { Crouch, Idle, Running } from "./playerStates.js";
+import { Crouch, Fall, Idle, Jump, Running, Slide } from "./playerStates.js";
 
 class Player {
   constructor(game) {
@@ -20,7 +20,14 @@ class Player {
     this.speed = 0;
     this.maxSpeed = 3;
 
-    this.states = [new Idle(this), new Running(this), new Crouch(this)];
+    this.states = [
+      new Idle(this),
+      new Running(this),
+      new Crouch(this),
+      new Jump(this),
+      new Fall(this),
+      new Slide(this),
+    ];
     this.currentState = this.states[0];
     this.currentState.enter();
   }
@@ -44,10 +51,6 @@ class Player {
       this.x = this.game.width - this.viewWidth;
     }
     // vertical movement
-    if (input.includes("ArrowUp") && this.onGround()) {
-      this.vy -= 20;
-    }
-
     this.y += this.vy;
 
     if (!this.onGround()) {
@@ -55,6 +58,8 @@ class Player {
     } else {
       this.vy = 0;
     }
+
+    // sprite animation
   }
   draw(context) {
     context.drawImage(
