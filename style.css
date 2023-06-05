@@ -14,10 +14,22 @@
   max-height: 100%;
 }
 
-#player {
+#player,
+#layer10,
+#layer0,
+#layer1,
+#layer2,
+#layer3,
+#layer4,
+#layer5,
+#layer6,
+#layer7,
+#layer8,
+#layer9,
+#layer11 {
   display: none;
 }
 
-.bg-image {
+/* .bg-image {
   display: none;
-}
+} */
