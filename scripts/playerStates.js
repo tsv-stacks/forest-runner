@@ -132,12 +132,10 @@ export class Slide extends State {
       (input.includes("ArrowLeft") || input.includes("ArrowRight")) &&
       !input.includes("ArrowDown")
     ) {
-      console.log("slide stand");
       this.player.setState(states.SLIDETOSTAND);
     } else if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP);
     } else if (!input.includes("ArrowDown") && !this.slideToStandEntered) {
-      console.log("slide stand");
       this.player.setState(states.SLIDETOSTAND);
       this.slideToStandEntered = true;
     } else if (this.player.speed === 0 && this.player.onGround()) {

@@ -8,6 +8,19 @@ class Layer {
     this.x = 0;
     this.y = 0;
   }
-  update() {}
-  draw() {}
+  update() {
+    if (this.x < -this.width) this.x = 0;
+    else this.x -= this.game.speed * this.speed;
+  }
+  draw(context) {
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
+}
+
+export class Background {
+  constructor(game) {
+    this.game = game;
+    this.width = 928;
+    this.height = 500;
+  }
 }
