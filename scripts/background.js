@@ -19,16 +19,16 @@ class Layer {
     context.drawImage(
       this.image,
       this.x,
-      this.y - 194,
+      this.y - 178,
       this.width,
-      this.height * 1.4
+      this.height * 1.36
     );
     context.drawImage(
       this.image,
       this.x + this.width,
-      this.y - 194,
+      this.y - 175,
       this.width,
-      this.height * 1.4
+      this.height * 1.35
     );
   }
 }
