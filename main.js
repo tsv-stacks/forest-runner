@@ -1,5 +1,6 @@
 import { Player } from "./scripts/player.js";
 import InputHandler from "./scripts/input.js";
+import { Background } from "./scripts/background.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -13,25 +14,34 @@ window.addEventListener("load", () => {
     constructor(width, height) {
       this.width = width;
       this.height = height;
+      this.groundMargin = 51;
+      this.speed = 0.5;
+      this.maxSpeed = 2;
+      this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler();
     }
-    update() {
-      this.player.update(this.input.keys);
+    update(deltaTime) {
+      this.background.update();
+      this.player.update(this.input.keys, deltaTime);
     }
     draw(context) {
+      this.background.draw(context);
       this.player.draw(context);
     }
   }
 
   const game = new Game(canvas.width, canvas.height);
+  let lastTime = 0;
 
-  function animate() {
+  function animate(timestamp) {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.draw(ctx);
-    game.update();
+    game.update(deltaTime);
     requestAnimationFrame(animate);
   }
 
-  animate();
+  animate(0);
 });

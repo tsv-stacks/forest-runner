@@ -1,3 +1,13 @@
+import {
+  Crouch,
+  Fall,
+  Idle,
+  Jump,
+  Running,
+  Slide,
+  SlideToStand,
+} from "./playerStates.js";
+
 class Player {
   constructor(game) {
     this.game = game;
@@ -9,14 +19,34 @@ class Player {
     this.viewHeight = this.height * this.scale;
 
     this.x = 0;
-    this.y = this.game.height - this.viewHeight;
+    this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
     this.weight = 1;
     this.image = document.getElementById("player");
+    this.frameX = 0;
+    this.frameY = 0;
+    this.maxFrame = 3;
     this.speed = 0;
-    this.maxSpeed = 3;
+    this.maxSpeed = 2;
+    this.fps = 10;
+    this.frameInterval = 1000 / this.fps;
+    this.frameTimer = 0;
+
+    this.states = [
+      new Idle(this),
+      new Running(this),
+      new Crouch(this),
+      new Jump(this),
+      new Fall(this),
+      new Slide(this),
+      new SlideToStand(this),
+    ];
+    this.currentState = this.states[0];
+    this.currentState.enter();
   }
-  update(input) {
+  update(input, deltaTime) {
+    this.currentState.handleInput(input);
+
     this.x += this.speed;
     // horizontal movement
     if (input.includes("ArrowRight")) {
@@ -34,10 +64,6 @@ class Player {
       this.x = this.game.width - this.viewWidth;
     }
     // vertical movement
-    if (input.includes("ArrowUp") && this.onGround()) {
-      this.vy -= 20;
-    }
-
     this.y += this.vy;
 
     if (!this.onGround()) {
@@ -45,12 +71,25 @@ class Player {
     } else {
       this.vy = 0;
     }
+
+    // sprite animation
+    if (this.frameTimer > this.frameInterval) {
+      this.frameTimer = 0;
+
+      if (this.frameX < this.maxFrame) {
+        this.frameX++;
+      } else {
+        this.frameX = 0;
+      }
+    } else {
+      this.frameTimer += deltaTime;
+    }
   }
   draw(context) {
     context.drawImage(
       this.image,
-      0,
-      0,
+      this.frameX * this.width,
+      this.frameY * this.height,
       this.width,
       this.height,
       this.x,
@@ -60,7 +99,16 @@ class Player {
     );
   }
   onGround() {
-    return this.y >= this.game.height - this.viewHeight;
+    return (
+      this.y >= this.game.height - this.viewHeight - this.game.groundMargin
+    );
+  }
+
+  setState(state, speed) {
+    this.currentState = this.states[state];
+    // this.game.speed = speed;
+    this.game.speed = speed * this.game.maxSpeed;
+    this.currentState.enter();
   }
 }
 
