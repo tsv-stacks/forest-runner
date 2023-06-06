@@ -27,7 +27,7 @@ class Player {
     this.frameY = 0;
     this.maxFrame = 3;
     this.speed = 0;
-    this.maxSpeed = 3;
+    this.maxSpeed = 2;
     this.fps = 10;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
@@ -104,8 +104,10 @@ class Player {
     );
   }
 
-  setState(state) {
+  setState(state, speed) {
     this.currentState = this.states[state];
+    // this.game.speed = speed;
+    this.game.speed = speed * this.game.maxSpeed;
     this.currentState.enter();
   }
 }
