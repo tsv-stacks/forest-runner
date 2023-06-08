@@ -1,6 +1,7 @@
 import { Player } from "./scripts/player.js";
 import InputHandler from "./scripts/input.js";
 import { Background } from "./scripts/background.js";
+import { FlyingEye } from "./scripts/enemies.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -20,6 +21,7 @@ window.addEventListener("load", () => {
       this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler();
+      this.enemies = [];
     }
     update(deltaTime) {
       this.background.update();
@@ -28,6 +30,9 @@ window.addEventListener("load", () => {
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
+    }
+    addEnemy() {
+      this.enemies.push(new FlyingEye(this));
     }
   }
 

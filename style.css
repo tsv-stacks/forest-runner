@@ -14,10 +14,8 @@
   max-height: 100%;
 }
 
+.bg-image,
+.enemy-image,
 #player {
-  display: none;
-}
-
-.bg-image {
   display: none;
 }
