@@ -1,7 +1,7 @@
 import { Player } from "./scripts/player.js";
 import InputHandler from "./scripts/input.js";
 import { Background } from "./scripts/background.js";
-import { FlyingEye } from "./scripts/enemies.js";
+import { FlyingEye, Goblin, Mushroom } from "./scripts/enemies.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
       this.input = new InputHandler();
       this.enemies = [];
       this.enemyTimer = 0;
-      this.enemyInterval = 3000;
+      this.enemyInterval = 2000;
     }
     update(deltaTime) {
       this.background.update();
@@ -50,7 +50,15 @@ window.addEventListener("load", () => {
       });
     }
     addEnemy() {
+      if (this.speed > 0 && Math.random() < 0.5) {
+        this.enemies.push(new Mushroom(this));
+        const hasGoblin = this.enemies.find((enemy) => enemy instanceof Goblin);
+        if (!hasGoblin) {
+          this.enemies.push(new Goblin(this));
+        }
+      }
       this.enemies.push(new FlyingEye(this));
+      console.log(this.enemies);
     }
   }
 

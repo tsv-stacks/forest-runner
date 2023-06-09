@@ -17,7 +17,7 @@ class Enemy {
   }
 
   update(deltaTime) {
-    this.x -= this.speedX;
+    this.x -= this.speedX + this.game.speed;
     this.y += this.speedY;
 
     if (this.frameTimer > this.frameInterval) {
@@ -32,7 +32,7 @@ class Enemy {
       this.frameTimer += deltaTime;
     }
 
-    if (this.x + this.width < 0) {
+    if (this.x + this.width + 50 < 0) {
       this.markedForDeletion = true;
     }
   }
@@ -58,22 +58,50 @@ export class FlyingEye extends Enemy {
   constructor(game) {
     super();
     this.game = game;
-    this.speedX = 2;
+    this.speedX = Math.random() + 1;
     this.speedY = 0;
     this.frameY = 3;
     this.maxFrame = 7;
     this.image = document.getElementById("flyingEye");
 
     this.x = this.game.width;
-    this.y = Math.random() * this.game.height * 0.5;
+    this.y = Math.random() * this.game.height * 0.5 - 80;
+
+    this.angle = 0;
+    this.va = Math.random() * 0.1 + 0.1;
   }
   update(deltaTime) {
     super.update(deltaTime);
+    this.angle += this.va;
+    this.y += Math.sin(this.angle);
+  }
+}
+export class Goblin extends Enemy {
+  constructor(game) {
+    super();
+    this.game = game;
+    this.image = document.getElementById("goblin");
+    this.x = this.game.width;
+    this.y = this.game.height - this.height - this.game.groundMargin - 53;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.frameY = 3;
+    this.maxFrame = 3;
   }
 }
 
-export class Goblin extends Enemy {}
-
 export class Skeleton extends Enemy {}
 
-export class Mushroom extends Enemy {}
+export class Mushroom extends Enemy {
+  constructor(game) {
+    super();
+    this.game = game;
+    this.image = document.getElementById("mushroom");
+    this.x = this.game.width;
+    this.y = this.game.height - this.height - this.game.groundMargin - 53;
+    this.speedX = 1;
+    this.speedY = 0;
+    this.frameY = 4;
+    this.maxFrame = 7;
+  }
+}
