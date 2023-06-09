@@ -14,6 +14,7 @@ class Enemy {
     this.viewHeight = this.height * this.scale;
 
     this.markedForDeletion = false;
+    this.hasCollided = false;
   }
 
   update(deltaTime) {
@@ -71,21 +72,34 @@ export class FlyingEye extends Enemy {
 
     this.angle = 0;
     this.va = Math.random() * 0.1 + 0.1;
+
+    this.hitboxX = this.x + 115;
+    this.hitboxY = this.y + 132;
+    this.hitboxWidth = 60;
+    this.hitboxHeight = 37;
   }
   update(deltaTime) {
     super.update(deltaTime);
     this.angle += this.va;
     this.y += Math.sin(this.angle);
+    this.hitboxX = this.x + 115;
+    this.hitboxY = this.y + 132;
   }
 
   draw(context) {
     super.draw(context);
     if (this.game.debug) {
       context.strokeStyle = "blue";
-      context.strokeRect(this.x + 115, this.y + 132, 60, 37);
+      context.strokeRect(
+        this.hitboxX,
+        this.hitboxY,
+        this.hitboxWidth,
+        this.hitboxHeight
+      );
     }
   }
 }
+
 export class Goblin extends Enemy {
   constructor(game) {
     super();
@@ -97,18 +111,31 @@ export class Goblin extends Enemy {
     this.speedY = 0;
     this.frameY = 0;
     this.maxFrame = 7;
+    this.hitboxX = this.x + 125;
+    this.hitboxY = this.y + 132;
+    this.hitboxWidth = 37;
+    this.hitboxHeight = 72;
+  }
+
+  update(deltaTime) {
+    super.update(deltaTime);
+    this.hitboxX = this.x + 125;
+    this.hitboxY = this.y + 132;
   }
 
   draw(context) {
     super.draw(context);
     if (this.game.debug) {
       context.strokeStyle = "blue";
-      context.strokeRect(this.x + 125, this.y + 132, 37, 72);
+      context.strokeRect(
+        this.hitboxX,
+        this.hitboxY,
+        this.hitboxWidth,
+        this.hitboxHeight
+      );
     }
   }
 }
-
-export class Skeleton extends Enemy {}
 
 export class Mushroom extends Enemy {
   constructor(game) {
@@ -147,3 +174,5 @@ export class Mushroom extends Enemy {
     }
   }
 }
+
+export class Skeleton extends Enemy {}
