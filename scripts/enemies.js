@@ -49,8 +49,10 @@ class Enemy {
       this.viewWidth,
       this.viewHeight
     );
-    context.strokeStyle = "red";
-    context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight);
+    if (this.game.debug) {
+      context.strokeStyle = "red";
+      context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight);
+    }
   }
 }
 
@@ -75,6 +77,14 @@ export class FlyingEye extends Enemy {
     this.angle += this.va;
     this.y += Math.sin(this.angle);
   }
+
+  draw(context) {
+    super.draw(context);
+    if (this.game.debug) {
+      context.strokeStyle = "blue";
+      context.strokeRect(this.x + 115, this.y + 132, 60, 37);
+    }
+  }
 }
 export class Goblin extends Enemy {
   constructor(game) {
@@ -85,8 +95,16 @@ export class Goblin extends Enemy {
     this.y = this.game.height - this.height - this.game.groundMargin - 53;
     this.speedX = 0;
     this.speedY = 0;
-    this.frameY = 3;
-    this.maxFrame = 3;
+    this.frameY = 0;
+    this.maxFrame = 7;
+  }
+
+  draw(context) {
+    super.draw(context);
+    if (this.game.debug) {
+      context.strokeStyle = "blue";
+      context.strokeRect(this.x + 125, this.y + 132, 37, 72);
+    }
   }
 }
 
@@ -103,5 +121,13 @@ export class Mushroom extends Enemy {
     this.speedY = 0;
     this.frameY = 4;
     this.maxFrame = 7;
+  }
+
+  draw(context) {
+    super.draw(context);
+    if (this.game.debug) {
+      context.strokeStyle = "blue";
+      context.strokeRect(this.x + 125, this.y + 126, 39, 75);
+    }
   }
 }

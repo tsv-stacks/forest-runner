@@ -97,6 +97,11 @@ class Player {
       this.viewWidth,
       this.viewHeight
     );
+
+    if (this.game.debug) {
+      context.strokeStyle = "white";
+      context.strokeRect(this.x + 40, this.y + 15, 35, 57);
+    }
   }
   onGround() {
     return (
@@ -106,10 +111,11 @@ class Player {
 
   setState(state, speed) {
     this.currentState = this.states[state];
-    // this.game.speed = speed;
     this.game.speed = speed * this.game.maxSpeed;
     this.currentState.enter();
   }
+
+  checkCollision() {}
 }
 
 export { Player };
