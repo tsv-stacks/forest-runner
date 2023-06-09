@@ -6,7 +6,11 @@ const states = {
   FALL: 4,
   SLIDE: 5,
   SLIDETOSTAND: 6,
-  ROLL: 10,
+  ATTACK1: 7,
+  ATTACK2: 8,
+  HIT: 9,
+  AIRATTACK1: 10,
+  AIRATTACK2: 11,
 };
 
 class State {
@@ -36,6 +40,8 @@ export class Idle extends State {
       this.player.setState(states.CROUCH, this.crouchSpeed);
     } else if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP, this.moveSpeed);
+    } else if (input.includes("Enter")) {
+      this.player.setState(states.ATTACK1, this.moveSpeed);
     }
   }
 }
@@ -167,6 +173,27 @@ export class SlideToStand extends State {
       this.player.setState(states.JUMP, 1);
     } else {
       this.player.setState(states.IDLE, 0.5);
+    }
+  }
+}
+
+export class AttackingGround extends State {
+  constructor(player) {
+    super("ATTACK1");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = 4;
+    this.player.maxFrame = 4;
+  }
+  handleInput(input) {
+    if (input.includes("ArrowUp")) {
+      this.player.setState(states.JUMP, this.moveSpeed);
+    } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
+      this.player.setState(states.SLIDE, this.actionSpeed);
+    } else if (!input.includes("ArrowLeft") && !input.includes("ArrowRight")) {
+      this.player.setState(states.IDLE, this.idleSpeed);
     }
   }
 }

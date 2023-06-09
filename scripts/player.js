@@ -7,6 +7,7 @@ import {
   Running,
   Slide,
   SlideToStand,
+  AttackingGround,
 } from "./playerStates.js";
 
 class Player {
@@ -41,6 +42,7 @@ class Player {
       new Fall(this),
       new Slide(this),
       new SlideToStand(this),
+      new AttackingGround(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
