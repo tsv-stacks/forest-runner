@@ -16,6 +16,8 @@ class Enemy {
     this.markedForDeletion = false;
     this.hasCollided = false;
     this.isAttacking = false;
+
+    this.attackAnimationCount = 0;
   }
 
   update(deltaTime) {
@@ -24,11 +26,13 @@ class Enemy {
 
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
-
       if (this.frameX < this.maxFrame) {
         this.frameX++;
       } else {
         this.frameX = 0;
+        if (this.frameY === 0 || this.frameY === 1) {
+          this.attackAnimationCount++;
+        }
       }
     } else {
       this.frameTimer += deltaTime;
@@ -53,7 +57,7 @@ class Enemy {
     );
     if (this.game.debug) {
       context.strokeStyle = "red";
-      context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight);
+      context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight - 80);
     }
   }
 }
@@ -127,12 +131,19 @@ export class Goblin extends Enemy {
     super.update(deltaTime);
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
-    if (this.isAttacking && this.frameY === 3) {
-      this.frameY = Math.random() < 0.5 ? 0 : 1;
+
+    if (this.attackAnimationCount <= 0) {
+      if (this.isAttacking && this.frameY === 3) {
+        this.frameY = Math.random() < 0.5 ? 0 : 1;
+        this.maxFrame = 7;
+      }
+    } else if (this.attackAnimationCount === 1) {
+      console.log("attacked once");
+      // this.frameY = 3;
+      // this.maxFrame = 3;
+      this.speedX = 1;
+      this.frameY = 4;
       this.maxFrame = 7;
-    } else if (!this.isAttacking) {
-      this.frameY = 3;
-      this.maxFrame = 3;
     }
   }
 

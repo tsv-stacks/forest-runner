@@ -18,5 +18,10 @@ Artwork created by Eder Muniz
 - [ ] hit animation
 - [ ] death animation
 - [ ] randomise animations / movements for enemies
-- [ ] make enemies attack once in range
+- [x] make enemies attack when in range
+- [ ] ground enemies attack once or have delay
 - [ ] cooldown on attacks
+
+## Future Features
+
+- [ ] Pause game toggle
