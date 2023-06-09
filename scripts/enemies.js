@@ -141,7 +141,7 @@ export class Goblin extends Enemy {
       console.log("attacked once");
       // this.frameY = 3;
       // this.maxFrame = 3;
-      this.speedX = 1;
+      this.speedX = 0.5;
       this.frameY = 4;
       this.maxFrame = 7;
     }
