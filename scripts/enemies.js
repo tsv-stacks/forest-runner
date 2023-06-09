@@ -15,6 +15,7 @@ class Enemy {
 
     this.markedForDeletion = false;
     this.hasCollided = false;
+    this.isAttacking = false;
   }
 
   update(deltaTime) {
@@ -84,6 +85,12 @@ export class FlyingEye extends Enemy {
     this.y += Math.sin(this.angle);
     this.hitboxX = this.x + 115;
     this.hitboxY = this.y + 132;
+    if (this.isAttacking && this.frameY === 3) {
+      console.log("change");
+      this.frameY = Math.random() < 0.5 ? 0 : 1;
+    } else if (!this.isAttacking) {
+      this.frameY = 3;
+    }
   }
 
   draw(context) {

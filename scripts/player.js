@@ -58,6 +58,7 @@ class Player {
     this.hitboxX = this.x + 40;
     this.hitboxY = this.y + 15;
     this.checkCollision();
+    this.attackRange();
     this.currentState.handleInput(input);
 
     this.x += this.speed;
@@ -141,6 +142,21 @@ class Player {
         console.log("collision");
         enemy.hasCollided = true;
         this.lives--;
+      }
+    });
+  }
+
+  attackRange() {
+    this.game.enemies.forEach((enemy) => {
+      if (!enemy.isAttacking) {
+        if (
+          enemy.x < this.hitboxX + this.hitboxWidth &&
+          enemy.x + enemy.viewWidth > this.hitboxX &&
+          enemy.y < this.hitboxY + this.hitboxHeight &&
+          enemy.y + enemy.viewHeight - 80 > this.hitboxY
+        ) {
+          enemy.isAttacking = true;
+        }
       }
     });
   }

@@ -31,6 +31,7 @@ export class Idle extends State {
   enter() {
     this.player.frameX = 0;
     this.player.frameY = 19;
+    // this.player.frameY = 6;
     this.player.maxFrame = 5;
   }
   handleInput(input) {
@@ -181,6 +182,8 @@ export class AttackingGround extends State {
   constructor(player) {
     super("ATTACK1");
     this.player = player;
+    this.attackFrame = 0;
+    this.attackDuration = 4;
   }
   enter() {
     this.player.frameX = 0;
