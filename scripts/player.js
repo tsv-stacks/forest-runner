@@ -1,3 +1,4 @@
+import { liveHearts } from "./hud.js";
 import {
   Crouch,
   Fall,
@@ -48,6 +49,8 @@ class Player {
     this.hitboxY = this.y + 15;
     this.hitboxWidth = 35;
     this.hitboxHeight = 57;
+
+    this.lives = 3;
   }
   update(input, deltaTime) {
     this.hitboxX = this.x + 40;
@@ -110,6 +113,7 @@ class Player {
       context.strokeStyle = "white";
       context.strokeRect(this.x + 40, this.y + 15, 35, 57);
     }
+    liveHearts(context, this.lives, this.game.width, this.game.height);
   }
   onGround() {
     return (
@@ -134,6 +138,7 @@ class Player {
       ) {
         console.log("collision");
         enemy.hasCollided = true;
+        this.lives--;
       }
     });
   }
