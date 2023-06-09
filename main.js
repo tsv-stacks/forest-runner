@@ -22,14 +22,32 @@ window.addEventListener("load", () => {
       this.player = new Player(this);
       this.input = new InputHandler();
       this.enemies = [];
+      this.enemyTimer = 0;
+      this.enemyInterval = 3000;
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
+      // enemies
+      if (this.enemyTimer > this.enemyInterval) {
+        this.addEnemy();
+        this.enemyTimer = 0;
+      } else {
+        this.enemyTimer += deltaTime;
+      }
+      this.enemies.forEach((enemy) => {
+        enemy.update(deltaTime);
+        if (enemy.markedForDeletion) {
+          this.enemies.splice(this.enemies.indexOf(enemy), 1);
+        }
+      });
     }
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
+      this.enemies.forEach((enemy) => {
+        enemy.draw(context);
+      });
     }
     addEnemy() {
       this.enemies.push(new FlyingEye(this));

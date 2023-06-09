@@ -12,10 +12,12 @@ class Enemy {
     this.scale = 2;
     this.viewWidth = this.width * this.scale;
     this.viewHeight = this.height * this.scale;
+
+    this.markedForDeletion = false;
   }
 
   update(deltaTime) {
-    this.x += this.speedX;
+    this.x -= this.speedX;
     this.y += this.speedY;
 
     if (this.frameTimer > this.frameInterval) {
@@ -28,6 +30,10 @@ class Enemy {
       }
     } else {
       this.frameTimer += deltaTime;
+    }
+
+    if (this.x + this.width < 0) {
+      this.markedForDeletion = true;
     }
   }
 
@@ -43,6 +49,8 @@ class Enemy {
       this.viewWidth,
       this.viewHeight
     );
+    context.strokeStyle = "red";
+    context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight);
   }
 }
 
@@ -51,10 +59,13 @@ export class FlyingEye extends Enemy {
     super();
     this.game = game;
     this.speedX = 2;
-    this.maxFrame = 8;
+    this.speedY = 0;
+    this.frameY = 3;
+    this.maxFrame = 7;
+    this.image = document.getElementById("flyingEye");
 
-    this.x = 200;
-    this.y = 200;
+    this.x = this.game.width;
+    this.y = Math.random() * this.game.height * 0.5;
   }
   update(deltaTime) {
     super.update(deltaTime);
