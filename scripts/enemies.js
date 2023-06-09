@@ -86,7 +86,6 @@ export class FlyingEye extends Enemy {
     this.hitboxX = this.x + 115;
     this.hitboxY = this.y + 132;
     if (this.isAttacking && this.frameY === 3) {
-      console.log("change");
       this.frameY = Math.random() < 0.5 ? 0 : 1;
     } else if (!this.isAttacking) {
       this.frameY = 3;
@@ -116,8 +115,8 @@ export class Goblin extends Enemy {
     this.y = this.game.height - this.height - this.game.groundMargin - 53;
     this.speedX = 0;
     this.speedY = 0;
-    this.frameY = 0;
-    this.maxFrame = 7;
+    this.frameY = 3;
+    this.maxFrame = 3;
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 37;
@@ -128,6 +127,13 @@ export class Goblin extends Enemy {
     super.update(deltaTime);
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
+    if (this.isAttacking && this.frameY === 3) {
+      this.frameY = Math.random() < 0.5 ? 0 : 1;
+      this.maxFrame = 7;
+    } else if (!this.isAttacking) {
+      this.frameY = 3;
+      this.maxFrame = 3;
+    }
   }
 
   draw(context) {
@@ -166,6 +172,11 @@ export class Mushroom extends Enemy {
     super.update(deltaTime);
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 126;
+    if (this.isAttacking && this.frameY === 4) {
+      this.frameY = Math.random() < 0.5 ? 0 : 1;
+    } else if (!this.isAttacking) {
+      this.frameY = 4;
+    }
   }
 
   draw(context) {
