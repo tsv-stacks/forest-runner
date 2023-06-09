@@ -121,13 +121,29 @@ export class Mushroom extends Enemy {
     this.speedY = 0;
     this.frameY = 4;
     this.maxFrame = 7;
+
+    this.hitboxX = this.x + 125;
+    this.hitboxY = this.y + 126;
+    this.hitboxWidth = 39;
+    this.hitboxHeight = 75;
+  }
+
+  update(deltaTime) {
+    super.update(deltaTime);
+    this.hitboxX = this.x + 125;
+    this.hitboxY = this.y + 126;
   }
 
   draw(context) {
     super.draw(context);
     if (this.game.debug) {
       context.strokeStyle = "blue";
-      context.strokeRect(this.x + 125, this.y + 126, 39, 75);
+      context.strokeRect(
+        this.hitboxX,
+        this.hitboxY,
+        this.hitboxWidth,
+        this.hitboxHeight
+      );
     }
   }
 }

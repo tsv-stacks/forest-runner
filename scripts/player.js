@@ -43,8 +43,16 @@ class Player {
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
+
+    this.hitboxX = this.x + 40;
+    this.hitboxY = this.y + 15;
+    this.hitboxWidth = 35;
+    this.hitboxHeight = 57;
   }
   update(input, deltaTime) {
+    this.hitboxX = this.x + 40;
+    this.hitboxY = this.y + 15;
+    this.checkCollision();
     this.currentState.handleInput(input);
 
     this.x += this.speed;
@@ -115,7 +123,20 @@ class Player {
     this.currentState.enter();
   }
 
-  checkCollision() {}
+  checkCollision() {
+    this.game.enemies.forEach((enemy) => {
+      if (
+        enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
+        enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
+        enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
+        enemy.hitboxY + enemy.hitboxHeight > this.hitboxY &&
+        !enemy.hasCollided
+      ) {
+        console.log("collision");
+        enemy.hasCollided = true;
+      }
+    });
+  }
 }
 
 export { Player };
