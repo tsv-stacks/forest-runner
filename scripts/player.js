@@ -132,16 +132,29 @@ class Player {
 
   checkCollision() {
     this.game.enemies.forEach((enemy) => {
-      if (
-        enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
-        enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
-        enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
-        enemy.hitboxY + enemy.hitboxHeight > this.hitboxY &&
-        !enemy.hasCollided
-      ) {
-        console.log("collision");
-        enemy.hasCollided = true;
-        this.lives--;
+      if (!enemy.hasCollided) {
+        if (
+          enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
+          enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
+          enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
+          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
+        ) {
+          console.log("collision");
+          enemy.hasCollided = true;
+          this.lives--;
+        }
+
+        if (
+          enemy.attackBoxX < this.hitboxX + this.hitboxWidth &&
+          enemy.attackBoxX + enemy.attackBoxWidth > this.hitboxX &&
+          enemy.attackBoxY < this.hitboxY + this.hitboxHeight &&
+          enemy.attackBoxY + enemy.attackBoxHeight > this.hitboxY &&
+          (enemy.frameY === 0 || enemy.frameY === 1)
+        ) {
+          console.log("attacked");
+          enemy.hasCollided = true;
+          this.lives--;
+        }
       }
     });
   }

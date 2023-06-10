@@ -51,15 +51,15 @@ window.addEventListener("load", () => {
       });
     }
     addEnemy() {
-      if (this.speed > 0 && Math.random() < 0.5) {
-        // this.enemies.push(new Mushroom(this));
-        const hasGoblin = this.enemies.find((enemy) => enemy instanceof Goblin);
-        if (!hasGoblin) {
-          this.enemies.push(new Goblin(this));
-        }
-      }
-      // this.enemies.push(new FlyingEye(this));
-      this.enemies.push(new Goblin(this));
+      // if (this.speed > 0 && Math.random() < 0.5) {
+      //   this.enemies.push(new Mushroom(this));
+      //   const hasGoblin = this.enemies.find((enemy) => enemy instanceof Goblin);
+      //   if (!hasGoblin) {
+      //     this.enemies.push(new Goblin(this));
+      //   }
+      // }
+      this.enemies.push(new FlyingEye(this));
+      // this.enemies.push(new Goblin(this));
       console.log(this.enemies);
     }
   }
