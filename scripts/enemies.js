@@ -83,6 +83,7 @@ export class FlyingEye extends Enemy {
     this.hitboxWidth = 60;
     this.hitboxHeight = 37;
   }
+
   update(deltaTime) {
     super.update(deltaTime);
     this.angle += this.va;
@@ -119,8 +120,13 @@ export class Goblin extends Enemy {
     this.y = this.game.height - this.height - this.game.groundMargin - 53;
     this.speedX = 0;
     this.speedY = 0;
-    this.frameY = 3;
-    this.maxFrame = 3;
+    // this.frameY = 3;
+    // this.maxFrame = 3;
+
+    // delete
+    this.frameY = 0;
+    this.maxFrame = 7;
+
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 37;
@@ -132,19 +138,17 @@ export class Goblin extends Enemy {
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
 
-    if (this.attackAnimationCount <= 0) {
-      if (this.isAttacking && this.frameY === 3) {
-        this.frameY = Math.random() < 0.5 ? 0 : 1;
-        this.maxFrame = 7;
-      }
-    } else if (this.attackAnimationCount === 1) {
-      console.log("attacked once");
-      // this.frameY = 3;
-      // this.maxFrame = 3;
-      this.speedX = 0.5;
-      this.frameY = 4;
-      this.maxFrame = 7;
-    }
+    // if (this.attackAnimationCount <= 0) {
+    //   if (this.isAttacking && this.frameY === 3) {
+    //     this.frameY = Math.random() < 0.5 ? 0 : 1;
+    //     this.maxFrame = 7;
+    //   }
+    // } else if (this.attackAnimationCount === 1) {
+    //   console.log("attacked once");
+    //   this.speedX = 0.5;
+    //   this.frameY = 4;
+    //   this.maxFrame = 7;
+    // }
   }
 
   draw(context) {
@@ -157,6 +161,24 @@ export class Goblin extends Enemy {
         this.hitboxWidth,
         this.hitboxHeight
       );
+      if (this.frameY === 0 && (this.frameX === 6 || this.frameX === 7)) {
+        context.strokeStyle = "white";
+        context.strokeRect(
+          this.hitboxX - 55,
+          this.hitboxY + 20,
+          this.hitboxWidth + 50,
+          this.hitboxHeight - 20
+        );
+      }
+      if (this.frameY === 1 && (this.frameX === 6 || this.frameX === 7)) {
+        context.strokeStyle = "white";
+        context.strokeRect(
+          this.hitboxX - 95,
+          this.hitboxY + 18,
+          this.hitboxWidth + 55,
+          this.hitboxHeight - 20
+        );
+      }
     }
   }
 }
