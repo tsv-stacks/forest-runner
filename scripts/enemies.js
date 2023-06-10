@@ -211,16 +211,22 @@ export class Mushroom extends Enemy {
     this.frameY = 4;
     this.maxFrame = 7;
 
+    // delete
+    // this.frameY = 1;
+
     this.hitboxX = this.x + 125;
-    this.hitboxY = this.y + 126;
+    this.hitboxY = this.y + 106;
     this.hitboxWidth = 39;
-    this.hitboxHeight = 75;
+    this.hitboxHeight = 85;
+
+    this.attackFrame = [6, 7];
+    this.attackY = [0, 1];
   }
 
   update(deltaTime) {
     super.update(deltaTime);
     this.hitboxX = this.x + 125;
-    this.hitboxY = this.y + 126;
+    this.hitboxY = this.y + 116;
     if (this.isAttacking && this.frameY === 4) {
       this.frameY = Math.random() < 0.5 ? 0 : 1;
     } else if (!this.isAttacking) {
@@ -238,6 +244,28 @@ export class Mushroom extends Enemy {
         this.hitboxWidth,
         this.hitboxHeight
       );
+
+      if (
+        this.attackY.includes(this.frameY) &&
+        this.attackFrame.includes(this.frameX)
+      ) {
+        context.strokeStyle = "white";
+        if (this.frameY === 0) {
+          this.attackBoxX = this.hitboxX - 50;
+        } else {
+          this.attackBoxX = this.hitboxX - 60;
+        }
+        this.attackBoxY = this.hitboxY + 20;
+        this.attackBoxWidth = this.hitboxWidth + 30;
+        this.attackBoxHeight = this.hitboxHeight - 20;
+
+        context.strokeRect(
+          this.attackBoxX,
+          this.attackBoxY,
+          this.attackBoxWidth,
+          this.attackBoxHeight
+        );
+      }
     }
   }
 }
