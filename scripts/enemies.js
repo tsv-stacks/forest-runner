@@ -18,6 +18,11 @@ class Enemy {
     this.isAttacking = false;
 
     this.attackAnimationCount = 0;
+
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
   }
 
   update(deltaTime) {
@@ -131,6 +136,13 @@ export class Goblin extends Enemy {
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 37;
     this.hitboxHeight = 72;
+
+    this.attackFrame = [6, 7];
+
+    // this.attackBoxX = this.hitboxX - 55;
+    // this.attackBoxY = this.hitboxY + 20;
+    // this.attackBoxWidth = this.hitboxWidth + 50;
+    // this.attackBoxHeight = this.hitboxHeight - 20;
   }
 
   update(deltaTime) {
@@ -161,22 +173,32 @@ export class Goblin extends Enemy {
         this.hitboxWidth,
         this.hitboxHeight
       );
-      if (this.frameY === 0 && (this.frameX === 6 || this.frameX === 7)) {
+      if (this.frameY === 0 && this.attackFrame.includes(this.frameX)) {
+        this.attackBoxX = this.hitboxX - 55;
+        this.attackBoxY = this.hitboxY + 20;
+        this.attackBoxWidth = this.hitboxWidth + 50;
+        this.attackBoxHeight = this.hitboxHeight - 20;
         context.strokeStyle = "white";
+
         context.strokeRect(
-          this.hitboxX - 55,
-          this.hitboxY + 20,
-          this.hitboxWidth + 50,
-          this.hitboxHeight - 20
+          this.attackBoxX,
+          this.attackBoxY,
+          this.attackBoxWidth,
+          this.attackBoxHeight
         );
       }
-      if (this.frameY === 1 && (this.frameX === 6 || this.frameX === 7)) {
+      if (this.frameY === 1 && this.attackFrame.includes(this.frameX)) {
         context.strokeStyle = "white";
+        this.attackBoxX = this.hitboxX - 95;
+        this.attackBoxY = this.hitboxY + 18;
+        this.attackBoxWidth = this.hitboxWidth + 55;
+        this.attackBoxHeight = this.hitboxHeight - 20;
+
         context.strokeRect(
-          this.hitboxX - 95,
-          this.hitboxY + 18,
-          this.hitboxWidth + 55,
-          this.hitboxHeight - 20
+          this.attackBoxX,
+          this.attackBoxY,
+          this.attackBoxWidth,
+          this.attackBoxHeight
         );
       }
     }
