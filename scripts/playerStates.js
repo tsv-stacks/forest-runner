@@ -31,7 +31,6 @@ export class Idle extends State {
   enter() {
     this.player.frameX = 0;
     this.player.frameY = 19;
-    // this.player.frameY = 6;
     this.player.maxFrame = 5;
   }
   handleInput(input) {
@@ -41,8 +40,8 @@ export class Idle extends State {
       this.player.setState(states.CROUCH, this.crouchSpeed);
     } else if (input.includes("ArrowUp")) {
       this.player.setState(states.JUMP, this.moveSpeed);
-    } else if (input.includes("Enter")) {
-      this.player.setState(states.ATTACK1, this.moveSpeed);
+    } else if (input.includes(" ")) {
+      this.player.setState(states.ATTACK1, this.idleSpeed);
     }
   }
 }
@@ -83,6 +82,8 @@ export class Running extends State {
       this.player.setState(states.SLIDE, this.actionSpeed);
     } else if (!input.includes("ArrowLeft") && !input.includes("ArrowRight")) {
       this.player.setState(states.IDLE, this.idleSpeed);
+    } else if (input.includes(" ")) {
+      this.player.setState(states.ATTACK1, this.idleSpeed);
     }
   }
 }
@@ -184,19 +185,42 @@ export class AttackingGround extends State {
     this.player = player;
     this.attackFrame = 0;
     this.attackDuration = 4;
+    this.groundAttacks = [
+      {
+        frameY: 4,
+        maxFrame: 4,
+        soundPath: "./assets/sounds/sword-attack-3.mp3",
+      },
+      {
+        frameY: 5,
+        maxFrame: 4,
+        soundPath: "./assets/sounds/sword-attack-1.mp3",
+      },
+      {
+        frameY: 6,
+        maxFrame: 5,
+        soundPath: "./assets/sounds/sword-attack-2.mp3",
+      },
+    ];
+    this.attackNum = 0;
   }
   enter() {
     this.player.frameX = 0;
-    this.player.frameY = 4;
-    this.player.maxFrame = 4;
+    this.player.frameY = this.groundAttacks[this.attackNum].frameY;
+    this.player.maxFrame = this.groundAttacks[this.attackNum].maxFrame;
   }
   handleInput(input) {
-    if (input.includes("ArrowUp")) {
-      this.player.setState(states.JUMP, this.moveSpeed);
-    } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
-      this.player.setState(states.SLIDE, this.actionSpeed);
-    } else if (!input.includes("ArrowLeft") && !input.includes("ArrowRight")) {
-      this.player.setState(states.IDLE, this.idleSpeed);
+    if (!this.player.isAttacking) {
+      if (input.includes("ArrowUp")) {
+        this.player.setState(states.JUMP, this.moveSpeed);
+      } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
+        this.player.setState(states.SLIDE, this.actionSpeed);
+      } else if (
+        !input.includes("ArrowLeft") &&
+        !input.includes("ArrowRight")
+      ) {
+        this.player.setState(states.IDLE, this.idleSpeed);
+      }
     }
   }
 }

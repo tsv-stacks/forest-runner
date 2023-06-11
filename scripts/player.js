@@ -53,7 +53,16 @@ class Player {
     this.hitboxHeight = 57;
 
     this.lives = 3;
+
+    this.isAttacking = false;
+    this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
+
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
   }
+
   update(input, deltaTime) {
     this.hitboxX = this.x + 40;
     this.hitboxY = this.y + 15;
@@ -98,7 +107,31 @@ class Player {
     } else {
       this.frameTimer += deltaTime;
     }
+
+    // attack
+    if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
+      this.isAttacking = true;
+      let audio = new Audio(
+        this.currentState.groundAttacks[this.currentState.attackNum].soundPath
+      );
+      audio.volume = 0.5;
+      audio.play();
+    }
+
+    if (
+      this.attackYFrames.includes(this.frameY) &&
+      this.frameX ===
+        this.currentState.groundAttacks[this.currentState.attackNum].maxFrame
+    ) {
+      this.currentState.attackNum === 2
+        ? (this.currentState.attackNum = 0)
+        : this.currentState.attackNum++;
+      this.isAttacking = false;
+      this.currentState = this.states[0];
+      this.currentState.enter();
+    }
   }
+
   draw(context) {
     context.drawImage(
       this.image,
@@ -118,6 +151,7 @@ class Player {
     }
     liveHearts(context, this.lives, this.game.width, this.game.height);
   }
+
   onGround() {
     return (
       this.y >= this.game.height - this.viewHeight - this.game.groundMargin
@@ -128,6 +162,13 @@ class Player {
     this.currentState = this.states[state];
     this.game.speed = speed * this.game.maxSpeed;
     this.currentState.enter();
+  }
+
+  resetAttackBox() {
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
   }
 
   checkCollision() {
