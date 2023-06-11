@@ -9,6 +9,8 @@ import {
   SlideToStand,
   AttackingGround,
   AttackingAir,
+  SlamAir,
+  SlamGround,
 } from "./playerStates.js";
 
 class Player {
@@ -45,6 +47,8 @@ class Player {
       new SlideToStand(this),
       new AttackingGround(this),
       new AttackingAir(this),
+      new SlamAir(this),
+      new SlamGround(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
@@ -113,6 +117,11 @@ class Player {
     // attack
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
+      console.log(
+        this.currentState.attacks[this.currentState.attackNum].soundPath
+      );
+      console.log(this.currentState);
+      console.log(this.isAttacking);
       let audio = new Audio(
         this.currentState.attacks[this.currentState.attackNum].soundPath
       );
@@ -128,6 +137,9 @@ class Player {
       this.currentState.attackNum === this.currentState.attacks.length - 1
         ? (this.currentState.attackNum = 0)
         : this.currentState.attackNum++;
+      if (this.frameY == 3) {
+        return;
+      }
       this.isAttacking = false;
       this.currentState = this.states[0];
       this.currentState.enter();

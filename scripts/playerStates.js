@@ -8,7 +8,8 @@ const states = {
   SLIDETOSTAND: 6,
   ATTACK1: 7,
   ATTACK2: 8,
-  HIT: 9,
+  SLAMAIR: 9,
+  SLAMGROUND: 10,
 };
 
 class State {
@@ -102,6 +103,8 @@ export class Jump extends State {
   handleInput(input) {
     if (this.player.vy > this.player.weight) {
       this.player.setState(states.FALL, this.moveSpeed);
+    } else if (input.includes(" ") && input.includes("ArrowDown")) {
+      this.player.setState(states.SLAMAIR, this.idleSpeed);
     } else if (input.includes(" ")) {
       this.player.setState(states.ATTACK2, this.idleSpeed);
     }
@@ -124,6 +127,39 @@ export class Fall extends State {
   handleInput(input) {
     if (this.player.onGround()) {
       this.player.setState(states.IDLE, this.idleSpeed);
+    } else if (input.includes(" ") && input.includes("ArrowDown")) {
+      this.player.setState(states.SLAMAIR, this.idleSpeed);
+    } else if (input.includes(" ")) {
+      this.player.setState(states.ATTACK1, this.idleSpeed);
+    }
+  }
+}
+
+export class SlamAir extends State {
+  constructor(player) {
+    super("SLAMAIR");
+    this.player = player;
+    this.attackFrame = 0;
+    this.attackNum = 0;
+    this.attacks = [
+      {
+        frameY: 3,
+        maxFrame: 1,
+        soundPath: "./assets/sounds/wind.mp3",
+      },
+    ];
+  }
+  enter() {
+    if (!this.player.onGround()) {
+      this.player.frameX = 0;
+      this.player.frameY = 3;
+      this.player.maxFrame = 1;
+    }
+  }
+  handleInput(input) {
+    if (this.player.onGround()) {
+      this.player.isAttacking = false;
+      this.player.setState(states.SLAMGROUND, this.idleSpeed);
     }
   }
 }
@@ -175,6 +211,43 @@ export class SlideToStand extends State {
       this.player.setState(states.JUMP, 1);
     } else {
       this.player.setState(states.IDLE, 0.5);
+    }
+  }
+}
+
+export class SlamGround extends State {
+  constructor(player) {
+    super("SLAMGROUND");
+    this.player = player;
+    this.attackFrame = 0;
+    this.attackNum = 0;
+    this.attacks = [
+      {
+        frameY: 2,
+        maxFrame: 3,
+        soundPath: "./assets/sounds/sword-slam.mp3",
+      },
+    ];
+  }
+
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = this.attacks[this.attackNum].frameY;
+    this.player.maxFrame = this.attacks[this.attackNum].maxFrame;
+  }
+
+  handleInput(input) {
+    if (!this.player.isAttacking) {
+      if (input.includes("ArrowUp")) {
+        this.player.setState(states.JUMP, this.moveSpeed);
+      } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
+        this.player.setState(states.SLIDE, this.actionSpeed);
+      } else if (
+        !input.includes("ArrowLeft") &&
+        !input.includes("ArrowRight")
+      ) {
+        this.player.setState(states.IDLE, this.idleSpeed);
+      }
     }
   }
 }
