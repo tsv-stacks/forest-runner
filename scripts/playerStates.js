@@ -9,8 +9,6 @@ const states = {
   ATTACK1: 7,
   ATTACK2: 8,
   HIT: 9,
-  AIRATTACK1: 10,
-  AIRATTACK2: 11,
 };
 
 class State {
@@ -104,6 +102,8 @@ export class Jump extends State {
   handleInput(input) {
     if (this.player.vy > this.player.weight) {
       this.player.setState(states.FALL, this.moveSpeed);
+    } else if (input.includes(" ")) {
+      this.player.setState(states.ATTACK2, this.idleSpeed);
     }
   }
 }
@@ -184,8 +184,7 @@ export class AttackingGround extends State {
     super("ATTACK1");
     this.player = player;
     this.attackFrame = 0;
-    this.attackDuration = 4;
-    this.groundAttacks = [
+    this.attacks = [
       {
         frameY: 4,
         maxFrame: 4,
@@ -206,8 +205,53 @@ export class AttackingGround extends State {
   }
   enter() {
     this.player.frameX = 0;
-    this.player.frameY = this.groundAttacks[this.attackNum].frameY;
-    this.player.maxFrame = this.groundAttacks[this.attackNum].maxFrame;
+    this.player.frameY = this.attacks[this.attackNum].frameY;
+    this.player.maxFrame = this.attacks[this.attackNum].maxFrame;
+  }
+  handleInput(input) {
+    if (!this.player.isAttacking) {
+      if (input.includes("ArrowUp")) {
+        this.player.setState(states.JUMP, this.moveSpeed);
+      } else if (input.includes("ArrowRight") && input.includes("ArrowDown")) {
+        this.player.setState(states.SLIDE, this.actionSpeed);
+      } else if (
+        !input.includes("ArrowLeft") &&
+        !input.includes("ArrowRight")
+      ) {
+        this.player.setState(states.IDLE, this.idleSpeed);
+      }
+    }
+  }
+}
+
+export class AttackingAir extends State {
+  constructor(player) {
+    super("ATTACK2");
+    this.player = player;
+    this.attackFrame = 0;
+    this.attacks = [
+      {
+        frameY: 0,
+        maxFrame: 3,
+        soundPath: "./assets/sounds/sword-attack-1.mp3",
+      },
+      {
+        frameY: 1,
+        maxFrame: 2,
+        soundPath: "./assets/sounds/sword-attack-2.mp3",
+      },
+      {
+        frameY: 6,
+        maxFrame: 5,
+        soundPath: "./assets/sounds/sword-attack-2.mp3",
+      },
+    ];
+    this.attackNum = 0;
+  }
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = this.attacks[this.attackNum].frameY;
+    this.player.maxFrame = this.attacks[this.attackNum].maxFrame;
   }
   handleInput(input) {
     if (!this.player.isAttacking) {

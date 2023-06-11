@@ -8,6 +8,7 @@ import {
   Slide,
   SlideToStand,
   AttackingGround,
+  AttackingAir,
 } from "./playerStates.js";
 
 class Player {
@@ -23,7 +24,7 @@ class Player {
     this.x = 0;
     this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
-    this.weight = 1;
+    this.weight = 0.75;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -43,6 +44,7 @@ class Player {
       new Slide(this),
       new SlideToStand(this),
       new AttackingGround(this),
+      new AttackingAir(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
@@ -112,7 +114,7 @@ class Player {
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
       let audio = new Audio(
-        this.currentState.groundAttacks[this.currentState.attackNum].soundPath
+        this.currentState.attacks[this.currentState.attackNum].soundPath
       );
       audio.volume = 0.5;
       audio.play();
@@ -121,9 +123,9 @@ class Player {
     if (
       this.attackYFrames.includes(this.frameY) &&
       this.frameX ===
-        this.currentState.groundAttacks[this.currentState.attackNum].maxFrame
+        this.currentState.attacks[this.currentState.attackNum].maxFrame
     ) {
-      this.currentState.attackNum === 2
+      this.currentState.attackNum === this.currentState.attacks.length - 1
         ? (this.currentState.attackNum = 0)
         : this.currentState.attackNum++;
       this.isAttacking = false;
