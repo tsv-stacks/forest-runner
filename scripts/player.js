@@ -161,7 +161,7 @@ class Player {
 
   attackRange() {
     this.game.enemies.forEach((enemy) => {
-      if (!enemy.isAttacking) {
+      if (!enemy.isAttacking && !enemy.attackDelayed && enemy.cooldown <= 0) {
         if (
           enemy.x < this.hitboxX + this.hitboxWidth &&
           enemy.x + enemy.viewWidth > this.hitboxX &&
@@ -169,6 +169,7 @@ class Player {
           enemy.y + enemy.viewHeight - 80 > this.hitboxY
         ) {
           enemy.isAttacking = true;
+          enemy.cooldown = enemy.attackCooldown;
         }
       }
     });

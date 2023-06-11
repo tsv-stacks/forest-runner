@@ -23,6 +23,8 @@ class Enemy {
     this.attackBoxY = 0;
     this.attackBoxWidth = 0;
     this.attackBoxHeight = 0;
+
+    this.cooldown = 0;
   }
 
   update(deltaTime) {
@@ -41,6 +43,10 @@ class Enemy {
       }
     } else {
       this.frameTimer += deltaTime;
+    }
+
+    if (this.cooldown > 0) {
+      this.cooldown -= deltaTime;
     }
 
     if (this.x + this.width + 50 < 0) {
@@ -261,16 +267,48 @@ export class Mushroom extends Enemy {
 
     this.attackFrame = [6, 7];
     this.attackY = [0, 1];
+
+    this.attackDelay = 500;
+    this.attackDelayed = false;
+
+    this.attackCooldown = 1000;
+    this.cooldown = 0;
   }
 
   update(deltaTime) {
     super.update(deltaTime);
+    console.log(this.attackAnimationCount);
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 116;
+
     if (this.isAttacking && this.frameY === 4) {
       this.frameY = Math.random() < 0.5 ? 0 : 1;
     } else if (!this.isAttacking) {
       this.frameY = 4;
+    }
+
+    if (
+      this.isAttacking &&
+      this.attackFrame.includes(this.frameX) &&
+      this.frameX === 7 &&
+      !this.attackDelayed
+    ) {
+      console.log("end of attack");
+      this.speedX = 0.5;
+      this.speedY = 0;
+      this.frameY = 4;
+      this.maxFrame = 7;
+      this.attackDelayed = true;
+
+      setTimeout(() => {
+        this.attackDelayed = false;
+        this.frameX = 0;
+      }, this.attackDelay);
+
+      if (this.cooldown <= 0) {
+        this.isAttacking = false;
+        this.cooldown = this.attackCooldown;
+      }
     }
   }
 
@@ -279,7 +317,8 @@ export class Mushroom extends Enemy {
 
     if (
       this.attackY.includes(this.frameY) &&
-      this.attackFrame.includes(this.frameX)
+      this.attackFrame.includes(this.frameX) &&
+      !this.attackDelayed
     ) {
       if (this.frameY === 0) {
         this.attackBoxX = this.hitboxX - 50;
