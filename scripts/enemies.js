@@ -65,6 +65,13 @@ class Enemy {
       context.strokeRect(this.x, this.y, this.viewWidth, this.viewHeight - 80);
     }
   }
+
+  resetAttackBox() {
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
+  }
 }
 
 export class FlyingEye extends Enemy {
@@ -83,10 +90,16 @@ export class FlyingEye extends Enemy {
     this.angle = 0;
     this.va = Math.random() * 0.1 + 0.1;
 
+    // delete
+    // this.frameY = 1;
+
     this.hitboxX = this.x + 115;
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 60;
     this.hitboxHeight = 37;
+
+    this.attackFrame = [5, 6];
+    this.attackY = [0, 1];
   }
 
   update(deltaTime) {
@@ -104,6 +117,21 @@ export class FlyingEye extends Enemy {
 
   draw(context) {
     super.draw(context);
+
+    if (this.frameY === 0 && this.attackFrame.includes(this.frameX)) {
+      this.attackBoxX = this.hitboxX - 10;
+      this.attackBoxY = this.hitboxY + 5;
+      this.attackBoxWidth = this.hitboxWidth - 10;
+      this.attackBoxHeight = this.hitboxHeight;
+    } else if (this.frameY === 1 && this.attackFrame.includes(this.frameX)) {
+      this.attackBoxX = this.hitboxX - 15;
+      this.attackBoxY = this.hitboxY - 15;
+      this.attackBoxWidth = this.hitboxWidth;
+      this.attackBoxHeight = this.hitboxHeight + 30;
+    } else {
+      this.resetAttackBox();
+    }
+
     if (this.game.debug) {
       context.strokeStyle = "blue";
       context.strokeRect(
@@ -112,6 +140,18 @@ export class FlyingEye extends Enemy {
         this.hitboxWidth,
         this.hitboxHeight
       );
+      if (
+        this.attackY.includes(this.frameY) &&
+        this.attackFrame.includes(this.frameX)
+      ) {
+        context.strokeStyle = "white";
+        context.strokeRect(
+          this.attackBoxX,
+          this.attackBoxY,
+          this.attackBoxWidth,
+          this.attackBoxHeight
+        );
+      }
     }
   }
 }
@@ -138,6 +178,7 @@ export class Goblin extends Enemy {
     this.hitboxHeight = 72;
 
     this.attackFrame = [6, 7];
+    this.attackY = [0, 1];
   }
 
   update(deltaTime) {
@@ -159,6 +200,21 @@ export class Goblin extends Enemy {
 
   draw(context) {
     super.draw(context);
+
+    if (this.frameY === 0 && this.attackFrame.includes(this.frameX)) {
+      this.attackBoxX = this.hitboxX - 55;
+      this.attackBoxY = this.hitboxY + 20;
+      this.attackBoxWidth = this.hitboxWidth + 50;
+      this.attackBoxHeight = this.hitboxHeight - 20;
+    } else if (this.frameY === 1 && this.attackFrame.includes(this.frameX)) {
+      this.attackBoxX = this.hitboxX - 95;
+      this.attackBoxY = this.hitboxY + 18;
+      this.attackBoxWidth = this.hitboxWidth + 55;
+      this.attackBoxHeight = this.hitboxHeight - 20;
+    } else {
+      this.resetAttackBox();
+    }
+
     if (this.game.debug) {
       context.strokeStyle = "blue";
       context.strokeRect(
@@ -167,27 +223,11 @@ export class Goblin extends Enemy {
         this.hitboxWidth,
         this.hitboxHeight
       );
-      if (this.frameY === 0 && this.attackFrame.includes(this.frameX)) {
-        this.attackBoxX = this.hitboxX - 55;
-        this.attackBoxY = this.hitboxY + 20;
-        this.attackBoxWidth = this.hitboxWidth + 50;
-        this.attackBoxHeight = this.hitboxHeight - 20;
+      if (
+        this.attackY.includes(this.frameY) &&
+        this.attackFrame.includes(this.frameX)
+      ) {
         context.strokeStyle = "white";
-
-        context.strokeRect(
-          this.attackBoxX,
-          this.attackBoxY,
-          this.attackBoxWidth,
-          this.attackBoxHeight
-        );
-      }
-      if (this.frameY === 1 && this.attackFrame.includes(this.frameX)) {
-        context.strokeStyle = "white";
-        this.attackBoxX = this.hitboxX - 95;
-        this.attackBoxY = this.hitboxY + 18;
-        this.attackBoxWidth = this.hitboxWidth + 55;
-        this.attackBoxHeight = this.hitboxHeight - 20;
-
         context.strokeRect(
           this.attackBoxX,
           this.attackBoxY,
@@ -236,6 +276,23 @@ export class Mushroom extends Enemy {
 
   draw(context) {
     super.draw(context);
+
+    if (
+      this.attackY.includes(this.frameY) &&
+      this.attackFrame.includes(this.frameX)
+    ) {
+      if (this.frameY === 0) {
+        this.attackBoxX = this.hitboxX - 50;
+      } else {
+        this.attackBoxX = this.hitboxX - 60;
+      }
+      this.attackBoxY = this.hitboxY + 20;
+      this.attackBoxWidth = this.hitboxWidth + 30;
+      this.attackBoxHeight = this.hitboxHeight - 20;
+    } else {
+      this.resetAttackBox();
+    }
+
     if (this.game.debug) {
       context.strokeStyle = "blue";
       context.strokeRect(
@@ -250,15 +307,6 @@ export class Mushroom extends Enemy {
         this.attackFrame.includes(this.frameX)
       ) {
         context.strokeStyle = "white";
-        if (this.frameY === 0) {
-          this.attackBoxX = this.hitboxX - 50;
-        } else {
-          this.attackBoxX = this.hitboxX - 60;
-        }
-        this.attackBoxY = this.hitboxY + 20;
-        this.attackBoxWidth = this.hitboxWidth + 30;
-        this.attackBoxHeight = this.hitboxHeight - 20;
-
         context.strokeRect(
           this.attackBoxX,
           this.attackBoxY,
