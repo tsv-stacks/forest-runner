@@ -1,3 +1,4 @@
+import { liveHearts } from "./hud.js";
 import {
   Crouch,
   Fall,
@@ -6,6 +7,10 @@ import {
   Running,
   Slide,
   SlideToStand,
+  AttackingGround,
+  AttackingAir,
+  SlamAir,
+  SlamGround,
 } from "./playerStates.js";
 
 class Player {
@@ -21,7 +26,7 @@ class Player {
     this.x = 0;
     this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
-    this.weight = 1;
+    this.weight = 0.75;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -40,11 +45,35 @@ class Player {
       new Fall(this),
       new Slide(this),
       new SlideToStand(this),
+      new AttackingGround(this),
+      new AttackingAir(this),
+      new SlamAir(this),
+      new SlamGround(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
+
+    this.hitboxX = this.x + 40;
+    this.hitboxY = this.y + 15;
+    this.hitboxWidth = 35;
+    this.hitboxHeight = 57;
+
+    this.lives = 3;
+
+    this.isAttacking = false;
+    this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
+
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
   }
+
   update(input, deltaTime) {
+    this.hitboxX = this.x + 40;
+    this.hitboxY = this.y + 15;
+    this.checkCollision();
+    this.attackRange();
     this.currentState.handleInput(input);
 
     this.x += this.speed;
@@ -84,7 +113,39 @@ class Player {
     } else {
       this.frameTimer += deltaTime;
     }
+
+    // attack
+    if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
+      this.isAttacking = true;
+      console.log(
+        this.currentState.attacks[this.currentState.attackNum].soundPath
+      );
+      console.log(this.currentState);
+      console.log(this.isAttacking);
+      let audio = new Audio(
+        this.currentState.attacks[this.currentState.attackNum].soundPath
+      );
+      audio.volume = 0.5;
+      audio.play();
+    }
+
+    if (
+      this.attackYFrames.includes(this.frameY) &&
+      this.frameX ===
+        this.currentState.attacks[this.currentState.attackNum].maxFrame
+    ) {
+      this.currentState.attackNum === this.currentState.attacks.length - 1
+        ? (this.currentState.attackNum = 0)
+        : this.currentState.attackNum++;
+      if (this.frameY == 3) {
+        return;
+      }
+      this.isAttacking = false;
+      this.currentState = this.states[0];
+      this.currentState.enter();
+    }
   }
+
   draw(context) {
     context.drawImage(
       this.image,
@@ -97,7 +158,14 @@ class Player {
       this.viewWidth,
       this.viewHeight
     );
+
+    if (this.game.debug) {
+      context.strokeStyle = "white";
+      context.strokeRect(this.x + 40, this.y + 15, 35, 57);
+    }
+    liveHearts(context, this.lives, this.game.width, this.game.height);
   }
+
   onGround() {
     return (
       this.y >= this.game.height - this.viewHeight - this.game.groundMargin
@@ -106,9 +174,59 @@ class Player {
 
   setState(state, speed) {
     this.currentState = this.states[state];
-    // this.game.speed = speed;
     this.game.speed = speed * this.game.maxSpeed;
     this.currentState.enter();
+  }
+
+  resetAttackBox() {
+    this.attackBoxX = 0;
+    this.attackBoxY = 0;
+    this.attackBoxWidth = 0;
+    this.attackBoxHeight = 0;
+  }
+
+  checkCollision() {
+    this.game.enemies.forEach((enemy) => {
+      if (!enemy.hasCollided) {
+        if (
+          enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
+          enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
+          enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
+          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
+        ) {
+          console.log("collision");
+          enemy.hasCollided = true;
+          this.lives--;
+        }
+
+        if (
+          enemy.attackBoxX < this.hitboxX + this.hitboxWidth &&
+          enemy.attackBoxX + enemy.attackBoxWidth > this.hitboxX &&
+          enemy.attackBoxY < this.hitboxY + this.hitboxHeight &&
+          enemy.attackBoxY + enemy.attackBoxHeight > this.hitboxY &&
+          (enemy.frameY === 0 || enemy.frameY === 1)
+        ) {
+          console.log("attacked");
+          enemy.hasCollided = true;
+          this.lives--;
+        }
+      }
+    });
+  }
+
+  attackRange() {
+    this.game.enemies.forEach((enemy) => {
+      if (!enemy.isAttacking) {
+        if (
+          enemy.x < this.hitboxX + this.hitboxWidth &&
+          enemy.x + enemy.viewWidth > this.hitboxX &&
+          enemy.y < this.hitboxY + this.hitboxHeight &&
+          enemy.y + enemy.viewHeight - 80 > this.hitboxY
+        ) {
+          enemy.isAttacking = true;
+        }
+      }
+    });
   }
 }
 

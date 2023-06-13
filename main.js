@@ -1,6 +1,7 @@
 import { Player } from "./scripts/player.js";
 import InputHandler from "./scripts/input.js";
 import { Background } from "./scripts/background.js";
+import { FlyingEye, Goblin, Mushroom } from "./scripts/enemies.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -19,15 +20,48 @@ window.addEventListener("load", () => {
       this.maxSpeed = 2;
       this.background = new Background(this);
       this.player = new Player(this);
-      this.input = new InputHandler();
+      this.input = new InputHandler(this);
+      this.enemies = [];
+      this.enemyTimer = 0;
+      this.enemyInterval = 2000;
+      this.debug = true;
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
+      // enemies
+      if (this.enemyTimer > this.enemyInterval) {
+        this.addEnemy();
+        this.enemyTimer = 0;
+      } else {
+        this.enemyTimer += deltaTime;
+      }
+      this.enemies.forEach((enemy) => {
+        enemy.update(deltaTime);
+        if (enemy.markedForDeletion) {
+          this.enemies.splice(this.enemies.indexOf(enemy), 1);
+        }
+      });
     }
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
+      this.enemies.forEach((enemy) => {
+        enemy.draw(context);
+      });
+    }
+    addEnemy() {
+      // if (this.speed > 0 && Math.random() < 0.5) {
+      //   this.enemies.push(new Mushroom(this));
+      //   const hasGoblin = this.enemies.find((enemy) => enemy instanceof Goblin);
+      //   if (!hasGoblin) {
+      //     this.enemies.push(new Goblin(this));
+      //   }
+      // }
+      // this.enemies.push(new Mushroom(this));
+      // this.enemies.push(new FlyingEye(this));
+      // this.enemies.push(new Goblin(this));
+      console.log(this.enemies);
     }
   }
 

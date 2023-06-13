@@ -1,5 +1,6 @@
 class InputHandler {
-  constructor() {
+  constructor(game) {
+    this.game = game;
     this.keys = [];
 
     window.addEventListener("keydown", (e) => {
@@ -8,10 +9,12 @@ class InputHandler {
           e.key === "ArrowUp" ||
           e.key === "ArrowLeft" ||
           e.key === "ArrowRight" ||
-          e.key === "Enter") &&
+          e.key === " ") &&
         this.keys.indexOf(e.key) === -1
       ) {
         this.keys.push(e.key);
+      } else if (e.key === "d") {
+        this.game.debug = !this.game.debug;
       }
     });
 
@@ -21,32 +24,12 @@ class InputHandler {
         e.key === "ArrowUp" ||
         e.key === "ArrowLeft" ||
         e.key === "ArrowRight" ||
-        e.key === "Enter"
+        e.key === " "
       ) {
         this.keys.splice(this.keys.indexOf(e.key), 1);
       }
     });
   }
 }
-
-// class InputHandler {
-//   constructor() {
-//     this.keys = [];
-//     window.addEventListener("keydown", this.handleKeyDown.bind(this));
-//     window.addEventListener("keyup", this.handleKeyUp.bind(this));
-//   }
-
-//   handleKeyDown(e) {
-//     if (e.code.startsWith("Arrow") && !this.keys.includes(e.code)) {
-//       this.keys.push(e.code);
-//     }
-//   }
-
-//   handleKeyUp(e) {
-//     if (this.keys.includes(e.code)) {
-//       this.keys.splice(this.keys.indexOf(e.code), 1);
-//     }
-//   }
-// }
 
 export default InputHandler;
