@@ -73,9 +73,9 @@ class Player {
         frameY: 4,
         attackXFrames: [2, 3, 4],
         attackBoxX: 0,
-        attackBoxY: -30,
-        attackBoxWidth: 40,
-        attackBoxHeight: 30,
+        attackBoxY: -25,
+        attackBoxWidth: 35,
+        attackBoxHeight: 25,
       },
       {
         frameY: 5,
@@ -91,6 +91,8 @@ class Player {
   update(input, deltaTime) {
     this.hitboxX = this.x + 40;
     this.hitboxY = this.y + 15;
+
+    this.setAttackBox();
     this.checkCollision();
     this.attackRange();
     this.currentState.handleInput(input);
@@ -136,7 +138,15 @@ class Player {
     // attack
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
-      this.setAttackBox();
+      let currentAttack = this.attackHitbox.find(
+        (e) => e.frameY === this.frameY
+      );
+      // this.setAttackBox(
+      //   this.x + currentAttack.attackBoxX,
+      //   this.y + currentAttack.attackBoxY,
+      //   currentAttack.attackBoxWidth,
+      //   currentAttack.attackBoxHeight
+      // );
       console.log(
         this.currentState.attacks[this.currentState.attackNum].soundPath
       );
@@ -190,8 +200,8 @@ class Player {
         this.attackYFrames.includes(this.frameY) &&
         currentAttack.attackXFrames.includes(this.frameX)
       ) {
-        console.log("we attacking boys");
-        context.strokeStyle = "green";
+        console.log("we attacking boys", this.attackBoxX);
+        context.strokeStyle = "white";
         context.strokeRect(
           this.attackBoxX,
           this.attackBoxY,
@@ -215,9 +225,22 @@ class Player {
     this.currentState.enter();
   }
 
+  // setAttackBox(attackBoxX, attackBoxY, attackBoxWidth, attackBoxHeight) {
+  //   console.log(attackBoxX);
+  //   this.attackBoxX = attackBoxX;
+  //   this.attackBoxY = attackBoxY;
+  //   this.attackBoxWidth = attackBoxWidth;
+  //   this.attackBoxHeight = attackBoxHeight;
+  // }
+
   setAttackBox() {
-    this.attackBoxX = this.hitboxX;
-    this.attackBoxY = this.hitboxY;
+    let currentAttack = this.attackHitbox.find((e) => e.frameY === this.frameY);
+    if (currentAttack) {
+      this.attackBoxX = this.hitboxX + currentAttack.attackBoxX;
+      this.attackBoxY = this.hitboxY + currentAttack.attackBoxY;
+      this.attackBoxHeight = this.hitboxHeight + currentAttack.attackBoxHeight;
+      this.attackBoxWidth = this.hitboxWidth + currentAttack.attackBoxWidth;
+    }
   }
 
   resetAttackBox() {
