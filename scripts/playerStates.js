@@ -130,7 +130,7 @@ export class Fall extends State {
     } else if (input.includes(" ") && input.includes("ArrowDown")) {
       this.player.setState(states.SLAMAIR, this.idleSpeed);
     } else if (input.includes(" ")) {
-      this.player.setState(states.ATTACK1, this.idleSpeed);
+      this.player.setState(states.ATTACK2, this.idleSpeed);
     }
   }
 }
@@ -263,16 +263,16 @@ export class AttackingGround extends State {
         maxFrame: 4,
         soundPath: "./assets/sounds/sword-attack-3.mp3",
       },
-      // {
-      //   frameY: 5,
-      //   maxFrame: 4,
-      //   soundPath: "./assets/sounds/sword-attack-1.mp3",
-      // },
-      // {
-      //   frameY: 6,
-      //   maxFrame: 5,
-      //   soundPath: "./assets/sounds/sword-attack-2.mp3",
-      // },
+      {
+        frameY: 5,
+        maxFrame: 4,
+        soundPath: "./assets/sounds/sword-attack-1.mp3",
+      },
+      {
+        frameY: 6,
+        maxFrame: 5,
+        soundPath: "./assets/sounds/sword-attack-2.mp3",
+      },
     ];
     this.attackNum = 0;
   }
