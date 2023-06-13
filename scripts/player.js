@@ -26,7 +26,7 @@ class Player {
     this.x = 0;
     this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
-    this.weight = 0.75;
+    this.weight = 1;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -63,10 +63,29 @@ class Player {
     this.isAttacking = false;
     this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
 
-    this.attackBoxX = 0;
-    this.attackBoxY = 0;
-    this.attackBoxWidth = 0;
-    this.attackBoxHeight = 0;
+    this.attackBoxX = this.hitboxX;
+    this.attackBoxY = this.hitboxY;
+    this.attackBoxWidth = this.hitboxWidth;
+    this.attackBoxHeight = this.hitboxHeight;
+
+    this.attackHitbox = [
+      {
+        frameY: 4,
+        attackXFrames: [2, 3, 4],
+        attackBoxX: 0,
+        attackBoxY: -30,
+        attackBoxWidth: 40,
+        attackBoxHeight: 30,
+      },
+      {
+        frameY: 5,
+        attackXFrames: [2, 3, 4],
+        attackBoxX: this.hitboxX,
+        attackBoxY: this.hitboxY - 20,
+        attackBoxWidth: this.hitboxWidth + 80,
+        attackBoxHeight: this.hitboxHeight + 10,
+      },
+    ];
   }
 
   update(input, deltaTime) {
@@ -117,6 +136,7 @@ class Player {
     // attack
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
+      this.setAttackBox();
       console.log(
         this.currentState.attacks[this.currentState.attackNum].soundPath
       );
@@ -143,6 +163,7 @@ class Player {
       this.isAttacking = false;
       this.currentState = this.states[0];
       this.currentState.enter();
+      this.resetAttackBox();
     }
   }
 
@@ -162,6 +183,22 @@ class Player {
     if (this.game.debug) {
       context.strokeStyle = "white";
       context.strokeRect(this.x + 40, this.y + 15, 35, 57);
+      let currentAttack = this.attackHitbox.find(
+        (e) => e.frameY === this.frameY
+      );
+      if (
+        this.attackYFrames.includes(this.frameY) &&
+        currentAttack.attackXFrames.includes(this.frameX)
+      ) {
+        console.log("we attacking boys");
+        context.strokeStyle = "green";
+        context.strokeRect(
+          this.attackBoxX,
+          this.attackBoxY,
+          this.attackBoxWidth,
+          this.attackBoxHeight
+        );
+      }
     }
     liveHearts(context, this.lives, this.game.width, this.game.height);
   }
@@ -176,6 +213,11 @@ class Player {
     this.currentState = this.states[state];
     this.game.speed = speed * this.game.maxSpeed;
     this.currentState.enter();
+  }
+
+  setAttackBox() {
+    this.attackBoxX = this.hitboxX;
+    this.attackBoxY = this.hitboxY;
   }
 
   resetAttackBox() {

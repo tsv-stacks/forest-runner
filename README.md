@@ -7,9 +7,9 @@ Artwork created by Eder Muniz
 ## To Do
 
 - [ ] way to chain attacks
-- [ ] attack on space bar key
-- [ ] air vs ground attack
-- [ ] slam attack
+- [x] attack on space bar key
+- [x] air vs ground attack
+- [x] slam attack
 - [ ] roll
 - [ ] walking with sword out animation
 - [ ] getting up after slide animation priority
@@ -22,9 +22,11 @@ Artwork created by Eder Muniz
 - [x] make enemies attack when in range
 - [ ] ground enemies attack once or have delay
 - [ ] cooldown on attacks
-- [ ] sword attack sounds
-- [ ] slam attack sound
+- [x] sword attack sounds
+- [x] slam attack sound
 - [ ] clean up background.js (Dry)
+- [ ] define hitboxes for player attacks
+- [ ] player attack detection
 
 ## Future Features
 
