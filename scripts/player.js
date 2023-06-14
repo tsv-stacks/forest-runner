@@ -11,6 +11,7 @@ import {
   AttackingAir,
   SlamAir,
   SlamGround,
+  Hit,
 } from "./playerStates.js";
 
 class Player {
@@ -49,6 +50,7 @@ class Player {
       new AttackingAir(this),
       new SlamAir(this),
       new SlamGround(this),
+      new Hit(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
@@ -278,18 +280,7 @@ class Player {
 
   checkCollision() {
     this.game.enemies.forEach((enemy) => {
-      if (!enemy.hasCollided) {
-        if (
-          enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
-          enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
-          enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
-          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
-        ) {
-          console.log("collision");
-          enemy.hasCollided = true;
-          this.lives--;
-        }
-
+      if (!enemy.hasCollided && !this.isAttacking) {
         if (
           enemy.attackBoxX < this.hitboxX + this.hitboxWidth &&
           enemy.attackBoxX + enemy.attackBoxWidth > this.hitboxX &&
@@ -298,6 +289,19 @@ class Player {
           (enemy.frameY === 0 || enemy.frameY === 1)
         ) {
           console.log("attacked");
+          this.setState(11, 0);
+          enemy.hasCollided = true;
+          this.lives--;
+        }
+
+        if (
+          enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
+          enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
+          enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
+          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
+        ) {
+          console.log("collision");
+          this.setState(11, 0);
           enemy.hasCollided = true;
           this.lives--;
         }

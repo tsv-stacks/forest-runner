@@ -10,6 +10,7 @@ const states = {
   ATTACK2: 8,
   SLAMAIR: 9,
   SLAMGROUND: 10,
+  HIT: 11,
 };
 
 class State {
@@ -338,6 +339,25 @@ export class AttackingAir extends State {
       ) {
         this.player.setState(states.IDLE, this.idleSpeed);
       }
+    }
+  }
+}
+
+export class Hit extends State {
+  constructor(player) {
+    super("HIT");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = 22;
+    this.player.maxFrame = 3;
+  }
+  handleInput(input) {
+    if (this.player.frameX >= 3 && this.player.onGround()) {
+      this.player.setState(states.IDLE, this.idleSpeed);
+    } else if (this.player.frameX >= 3 && !this.player.onGround()) {
+      this.player.setState(states.FALL, this.moveSpeed);
     }
   }
 }
