@@ -3,6 +3,11 @@
 ## Credit
 
 Artwork created by Eder Muniz
+https://edermunizz.itch.io/free-pixel-art-forest
+Player Character created by rvros
+https://rvros.itch.io/animated-pixel-hero
+Enemies created by LuizMelo
+https://luizmelo.itch.io/monsters-creatures-fantasy
 
 ## To Do
 
@@ -15,7 +20,7 @@ Artwork created by Eder Muniz
 - [ ] getting up after slide animation priority
 - [ ] game start with character on idle
 - [ ] draw sword animation on button start
-- [ ] hit animation
+- [x] hit animation
 - [ ] death animation
 - [x] randomise animations / movements for enemies
 - [ ] mushroom attacks continously in range but with big cooldown
@@ -27,6 +32,7 @@ Artwork created by Eder Muniz
 - [ ] clean up background.js (Dry)
 - [ ] define hitboxes for player attacks
 - [ ] player attack detection
+- [ ] mute button
 
 ## Future Features
 

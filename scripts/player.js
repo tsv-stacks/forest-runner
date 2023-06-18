@@ -236,7 +236,6 @@ class Player {
         this.attackYFrames.includes(this.frameY) &&
         currentAttack.attackXFrames.includes(this.frameX)
       ) {
-        console.log("we attacking boys", this.attackBoxX);
         context.strokeStyle = "red";
         context.strokeRect(
           this.attackBoxX,
@@ -280,7 +279,28 @@ class Player {
 
   checkCollision() {
     this.game.enemies.forEach((enemy) => {
+      let currentAttack = this.attackHitbox.find(
+        (e) => e.frameY === this.frameY
+      );
+      // player attacking enemy
+      if (
+        !enemy.isDead &&
+        this.attackYFrames.includes(this.frameY) &&
+        currentAttack.attackXFrames.includes(this.frameX)
+      ) {
+        if (
+          enemy.hitboxX < this.attackBoxX + this.attackBoxWidth &&
+          enemy.hitboxX + enemy.hitboxWidth > this.attackBoxX &&
+          enemy.hitboxY < this.attackBoxY + this.attackBoxHeight &&
+          enemy.hitboxY + enemy.hitboxHeight > this.attackBoxY
+        ) {
+          console.log("enemy hit");
+          enemy.death();
+        }
+      }
+
       if (!enemy.hasCollided && !this.isAttacking) {
+        // enemy attacking player
         if (
           enemy.attackBoxX < this.hitboxX + this.hitboxWidth &&
           enemy.attackBoxX + enemy.attackBoxWidth > this.hitboxX &&
@@ -293,7 +313,7 @@ class Player {
           enemy.hasCollided = true;
           this.lives--;
         }
-
+        // enemy colliding with player
         if (
           enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
           enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&

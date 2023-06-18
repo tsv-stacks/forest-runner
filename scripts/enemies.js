@@ -23,6 +23,22 @@ class Enemy {
     this.attackBoxY = 0;
     this.attackBoxWidth = 0;
     this.attackBoxHeight = 0;
+
+    this.isDead = false;
+  }
+
+  death() {
+    if (!this.isDead) {
+      this.fps = 2;
+      this.isDead = true;
+      this.hasCollided = true;
+      this.frameX = 0;
+      this.frameY = 2;
+      this.maxFrame = 3;
+      this.speedX = 0.2;
+    } else if (this.isDead && this.frameX === 3 && this.frameY === 2) {
+      this.frameX = 3;
+    }
   }
 
   update(deltaTime) {
@@ -34,7 +50,7 @@ class Enemy {
       if (this.frameX < this.maxFrame) {
         this.frameX++;
       } else {
-        this.frameX = 0;
+        if (!this.isDead) this.frameX = 0;
         if (this.frameY === 0 || this.frameY === 1) {
           this.attackAnimationCount++;
         }
@@ -154,6 +170,12 @@ export class FlyingEye extends Enemy {
       }
     }
   }
+
+  onGround() {
+    return (
+      this.y >= this.game.height - this.hitboxHeight - this.game.groundMargin
+    );
+  }
 }
 
 export class Goblin extends Enemy {
@@ -246,7 +268,7 @@ export class Mushroom extends Enemy {
     this.image = document.getElementById("mushroom");
     this.x = this.game.width;
     this.y = this.game.height - this.height - this.game.groundMargin - 53;
-    this.speedX = 1;
+    this.speedX = 0.5;
     this.speedY = 0;
     this.frameY = 4;
     this.maxFrame = 7;
@@ -267,10 +289,15 @@ export class Mushroom extends Enemy {
     super.update(deltaTime);
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 116;
-    if (this.isAttacking && this.frameY === 4) {
-      this.frameY = Math.random() < 0.5 ? 0 : 1;
-    } else if (!this.isAttacking) {
+
+    if (this.attackAnimationCount <= 0) {
+      if (this.isAttacking && this.frameY === 4) {
+        this.frameY = Math.random() < 0.5 ? 0 : 1;
+      }
+    } else if (this.attackAnimationCount === 1 && !this.isDead) {
+      this.speedX = Math.random() * 0.2 + 0.3;
       this.frameY = 4;
+      this.maxFrame = 7;
     }
   }
 
