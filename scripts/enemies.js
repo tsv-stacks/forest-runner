@@ -213,7 +213,7 @@ export class Goblin extends Enemy {
         this.frameY = Math.random() < 0.5 ? 0 : 1;
         this.maxFrame = 7;
       }
-    } else if (this.attackAnimationCount === 1) {
+    } else if (this.attackAnimationCount === 1 && !this.isDead) {
       this.speedX = 0.5;
       this.frameY = 4;
       this.maxFrame = 7;
@@ -344,5 +344,3 @@ export class Mushroom extends Enemy {
     }
   }
 }
-
-export class Skeleton extends Enemy {}
