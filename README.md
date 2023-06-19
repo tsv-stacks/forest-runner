@@ -3,10 +3,15 @@
 ## Credit
 
 Artwork created by Eder Muniz
+
 https://edermunizz.itch.io/free-pixel-art-forest
+
 Player Character created by rvros
+
 https://rvros.itch.io/animated-pixel-hero
+
 Enemies created by LuizMelo
+
 https://luizmelo.itch.io/monsters-creatures-fantasy
 
 ## To Do

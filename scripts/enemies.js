@@ -25,6 +25,9 @@ class Enemy {
     this.attackBoxHeight = 0;
 
     this.isDead = false;
+
+    this.vy = 5;
+    this.weight = 1;
   }
 
   death() {
@@ -36,6 +39,10 @@ class Enemy {
       this.frameY = 2;
       this.maxFrame = 3;
       this.speedX = 0.2;
+      this.hitboxX = 0;
+      this.hitboxY = 0;
+      this.hitboxWidth = 0;
+      this.hitboxHeight = 0;
     } else if (this.isDead && this.frameX === 3 && this.frameY === 2) {
       this.frameX = 3;
     }
@@ -62,6 +69,25 @@ class Enemy {
     if (this.x + this.width + 50 < 0) {
       this.markedForDeletion = true;
     }
+
+    if (
+      this.y <=
+        this.game.height - this.hitboxHeight - this.game.groundMargin - 205 &&
+      this.isDead
+    ) {
+      this.vy += this.weight;
+      this.y += this.vy;
+    }
+    if (
+      Math.abs(
+        this.y -
+          (this.game.height - this.hitboxHeight - this.game.groundMargin - 205)
+      ) < 5 &&
+      this.isDead
+    ) {
+      this.y =
+        this.game.height - this.hitboxHeight - this.game.groundMargin - 205;
+    }
   }
 
   draw(context) {
@@ -87,6 +113,13 @@ class Enemy {
     this.attackBoxY = 0;
     this.attackBoxWidth = 0;
     this.attackBoxHeight = 0;
+  }
+
+  onGround() {
+    return (
+      this.y <=
+      this.game.height - this.hitboxHeight - this.game.groundMargin - 53
+    );
   }
 }
 
@@ -121,7 +154,7 @@ export class FlyingEye extends Enemy {
   update(deltaTime) {
     super.update(deltaTime);
     this.angle += this.va;
-    this.y += Math.sin(this.angle);
+    if (!this.isDead) this.y += Math.sin(this.angle);
     this.hitboxX = this.x + 115;
     this.hitboxY = this.y + 132;
     if (this.isAttacking && this.frameY === 3) {
