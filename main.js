@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
   const ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
 
-  canvas.width = 500;
+  canvas.width = 750;
   canvas.height = 500;
 
   class Game {
@@ -58,9 +58,9 @@ window.addEventListener("load", () => {
       //     this.enemies.push(new Goblin(this));
       //   }
       // }
-      // this.enemies.push(new Mushroom(this));
-      // this.enemies.push(new FlyingEye(this));
-      // this.enemies.push(new Goblin(this));
+      this.enemies.push(new Mushroom(this));
+      this.enemies.push(new FlyingEye(this));
+      this.enemies.push(new Goblin(this));
       console.log(this.enemies);
     }
   }
