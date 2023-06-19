@@ -45,10 +45,10 @@ window.addEventListener("load", () => {
     }
     draw(context) {
       this.background.draw(context);
-      this.player.draw(context);
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
       });
+      this.player.draw(context);
     }
     addEnemy() {
       // if (this.speed > 0 && Math.random() < 0.5) {
@@ -58,9 +58,9 @@ window.addEventListener("load", () => {
       //     this.enemies.push(new Goblin(this));
       //   }
       // }
-      this.enemies.push(new Mushroom(this));
+      // this.enemies.push(new Mushroom(this));
       this.enemies.push(new FlyingEye(this));
-      this.enemies.push(new Goblin(this));
+      // this.enemies.push(new Goblin(this));
       console.log(this.enemies);
     }
   }

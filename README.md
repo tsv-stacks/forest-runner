@@ -27,19 +27,22 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] draw sword animation on button start
 - [x] hit animation
 - [ ] death animation
+- [ ] player death animation
 - [x] randomise animations / movements for enemies
-- [ ] mushroom attacks continously in range but with big cooldown
 - [x] make enemies attack when in range
-- [ ] ground enemies attack once or have delay
+- [x] ground enemies attack once or have delay
 - [ ] cooldown on attacks
 - [x] sword attack sounds
 - [x] slam attack sound
 - [ ] clean up background.js (Dry)
-- [ ] define hitboxes for player attacks
-- [ ] player attack detection
-- [ ] mute button
+- [x] define hitboxes for player attacks
+- [x] player attack detection
+- [ ] Game Over screen
+- [ ] game start screen
 
 ## Future Features
 
 - [ ] Pause game toggle
 - [ ] Game Music
+- [ ] Mute button
+- [ ] Mushroom attacks continously in range but with big cooldown
