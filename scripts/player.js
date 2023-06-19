@@ -12,6 +12,7 @@ import {
   SlamAir,
   SlamGround,
   Hit,
+  Death,
 } from "./playerStates.js";
 
 class Player {
@@ -51,6 +52,7 @@ class Player {
       new SlamAir(this),
       new SlamGround(this),
       new Hit(this),
+      new Death(this),
     ];
     this.currentState = this.states[0];
     this.currentState.enter();
@@ -60,7 +62,9 @@ class Player {
     this.hitboxWidth = 35;
     this.hitboxHeight = 57;
 
-    this.lives = 3;
+    // adjust
+    this.lives = 1;
+    this.isDead = false;
 
     this.isAttacking = false;
     this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
@@ -165,6 +169,7 @@ class Player {
     }
 
     // sprite animation
+
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
 
@@ -177,22 +182,8 @@ class Player {
       this.frameTimer += deltaTime;
     }
 
-    // attack
-    if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
-      this.isAttacking = true;
-      let currentAttack = this.attackHitbox.find(
-        (e) => e.frameY === this.frameY
-      );
-      console.log(
-        this.currentState.attacks[this.currentState.attackNum].soundPath
-      );
-      console.log(this.currentState);
-      console.log(this.isAttacking);
-      let audio = new Audio(
-        this.currentState.attacks[this.currentState.attackNum].soundPath
-      );
-      audio.volume = 0.5;
-      audio.play();
+    if (this.lives === 0 && !this.isDead) {
+      return this.death();
     }
 
     if (
@@ -246,6 +237,26 @@ class Player {
       }
     }
     liveHearts(context, this.lives, this.game.width, this.game.height);
+  }
+
+  death() {
+    console.log("death", this.currentState);
+    // if (!this.isDead) {
+    //   this.fps = 4;
+    //   this.isDead = true;
+    //   this.frameX = 0;
+    //   this.frameY = 8;
+    //   this.maxFrame = 5;
+    //   this.hitboxX = 0;
+    //   this.hitboxY = 0;
+    //   this.hitboxWidth = 0;
+    //   this.hitboxHeight = 0;
+    //   this.speed = 0;
+    // } else if (this.isDead && this.frameX === 5 && this.frameY === 8) {
+    //   this.frameX = 3;
+    // }
+    this.setState(12, 0);
+    this.currentState.enter();
   }
 
   onGround() {

@@ -11,6 +11,7 @@ const states = {
   SLAMAIR: 9,
   SLAMGROUND: 10,
   HIT: 11,
+  DEATH: 12,
 };
 
 class State {
@@ -359,5 +360,22 @@ export class Hit extends State {
     } else if (this.player.frameX >= 3 && !this.player.onGround()) {
       this.player.setState(states.FALL, this.moveSpeed);
     }
+  }
+}
+
+export class Death extends State {
+  constructor(player) {
+    super("DEATH");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameX = 0;
+    this.player.frameY = 8;
+    this.player.maxFrame = 5;
+  }
+  handleInput(input) {
+    // if (this.player.frameX >= 5) {
+    //   this.player.frameX = 5;
+    // }
   }
 }
