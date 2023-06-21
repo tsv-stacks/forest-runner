@@ -1,4 +1,5 @@
 import { liveHearts } from "./hud.js";
+import { CollisionAnimation } from "./collisionAnimation.js";
 import {
   Crouch,
   Fall,
@@ -211,6 +212,13 @@ class Player {
       this.currentState.enter();
       this.resetAttackBox();
     }
+    //  collision sprites
+    if (this.game.collisions.length > 0) {
+      this.game.collisions.forEach((collision, index) => {
+        collision.update(deltaTime);
+        if (collision.markedForDeletion) this.game.collisions.splice(index, 1);
+      });
+    }
   }
 
   draw(context) {
@@ -295,6 +303,14 @@ class Player {
           enemy.hitboxY + enemy.hitboxHeight > this.attackBoxY
         ) {
           console.log("enemy hit");
+          this.game.collisions.push(
+            new CollisionAnimation(
+              this.game,
+              enemy.hitboxX + enemy.hitboxWidth * 0.5,
+              enemy.hitboxY + enemy.hitboxHeight * 0.5
+            )
+          );
+          console.log(this.game.collisions);
           enemy.death();
         }
       }
