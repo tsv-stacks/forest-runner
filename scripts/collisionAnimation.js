@@ -1,20 +1,30 @@
 import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
 
 export class CollisionAnimation {
-  constructor(game, x, y) {
+  constructor(
+    game,
+    x,
+    y,
+    spHeight,
+    spWidth,
+    image,
+    maxFrame,
+    fps,
+    sizeModifier
+  ) {
     this.game = game;
-    this.image = document.getElementById("enemy-eye-particle");
-    this.spriteHeight = 48;
-    this.spriteWidth = 48;
-    this.sizeModifier = Math.random() + 0.5;
+    this.image = image;
+    this.spriteHeight = spHeight;
+    this.spriteWidth = spWidth;
+    this.sizeModifier = (Math.random() + 0.5) * sizeModifier;
     this.width = this.spriteWidth * this.sizeModifier;
     this.height = this.spriteHeight * this.sizeModifier;
     this.x = x - this.width * 0.5;
     this.y = y - this.width * 0.5;
     this.frameX = 0;
-    this.maxFrame = 5;
+    this.maxFrame = maxFrame;
     this.markedForDeletion = false;
-    this.fps = 15;
+    this.fps = fps;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
   }
@@ -31,6 +41,11 @@ export class CollisionAnimation {
       this.width * 2,
       this.height * 2
     );
+
+    if (this.game.debug) {
+      context.strokeStyle = "orange";
+      context.strokeRect(this.x, this.y, this.width * 2, this.height * 2);
+    }
   }
 
   update(deltaTime) {
@@ -54,6 +69,7 @@ export const enemyParticles = [
     image: document.getElementById("enemy-eye-particle"),
     maxFrame: 5,
     fps: 15,
+    sizeModifier: 1,
   },
   {
     spriteHeight: 50,
@@ -61,6 +77,7 @@ export const enemyParticles = [
     image: document.getElementById("mushroom-particle"),
     maxFrame: 3,
     fps: 12,
+    sizeModifier: 1,
   },
   {
     spriteHeight: 100,
@@ -68,6 +85,7 @@ export const enemyParticles = [
     image: document.getElementById("goblin-particle"),
     maxFrame: 5,
     fps: 15,
+    sizeModifier: 0.5,
   },
 ];
 

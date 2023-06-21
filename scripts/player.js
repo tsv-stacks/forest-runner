@@ -308,15 +308,20 @@ class Player {
           enemy.hitboxY + enemy.hitboxHeight > this.attackBoxY
         ) {
           let enemyNum = enemyCheck(enemy);
-          console.log(enemyNum);
 
           console.log("enemy hit");
 
           this.game.collisions.push(
             new CollisionAnimation(
               this.game,
-              enemy.hitboxX + enemy.hitboxWidth * 0.5,
-              enemy.hitboxY + enemy.hitboxHeight * 0.5
+              enemy.hitboxX + enemy.hitboxWidth * 0.5 - 20,
+              enemy.hitboxY + enemy.hitboxHeight * 0.5 - 10,
+              enemyParticles[enemyNum].spriteHeight,
+              enemyParticles[enemyNum].spriteWidth,
+              enemyParticles[enemyNum].image,
+              enemyParticles[enemyNum].maxFrame,
+              enemyParticles[enemyNum].fps,
+              enemyParticles[enemyNum].sizeModifier
             )
           );
           console.log(this.game.collisions);
