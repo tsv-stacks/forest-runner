@@ -1,3 +1,5 @@
+import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
+
 export class CollisionAnimation {
   constructor(game, x, y) {
     this.game = game;
@@ -42,5 +44,42 @@ export class CollisionAnimation {
     }
 
     if (this.frameX > this.maxFrame) this.markedForDeletion = true;
+  }
+}
+
+export const enemyParticles = [
+  {
+    spriteHeight: 48,
+    spriteWidth: 48,
+    image: document.getElementById("enemy-eye-particle"),
+    maxFrame: 5,
+    fps: 15,
+  },
+  {
+    spriteHeight: 50,
+    spriteWidth: 50,
+    image: document.getElementById("mushroom-particle"),
+    maxFrame: 3,
+    fps: 12,
+  },
+  {
+    spriteHeight: 100,
+    spriteWidth: 100,
+    image: document.getElementById("goblin-particle"),
+    maxFrame: 5,
+    fps: 15,
+  },
+];
+
+export function enemyCheck(enemy) {
+  if (enemy instanceof FlyingEye) {
+    console.log("flying enemy");
+    return 0;
+  } else if (enemy instanceof Mushroom) {
+    console.log("mushroom");
+    return 1;
+  } else if (enemy instanceof Goblin) {
+    console.log("goblin");
+    return 2;
   }
 }

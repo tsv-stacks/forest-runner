@@ -1,5 +1,9 @@
 import { liveHearts } from "./hud.js";
-import { CollisionAnimation } from "./collisionAnimation.js";
+import {
+  CollisionAnimation,
+  enemyCheck,
+  enemyParticles,
+} from "./collisionAnimation.js";
 import {
   Crouch,
   Fall,
@@ -14,6 +18,7 @@ import {
   SlamGround,
   Hit,
 } from "./playerStates.js";
+import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
 
 class Player {
   constructor(game) {
@@ -28,7 +33,7 @@ class Player {
     this.x = 0;
     this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
-    this.weight = 1;
+    this.weight = 0.5;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -302,7 +307,11 @@ class Player {
           enemy.hitboxY < this.attackBoxY + this.attackBoxHeight &&
           enemy.hitboxY + enemy.hitboxHeight > this.attackBoxY
         ) {
+          let enemyNum = enemyCheck(enemy);
+          console.log(enemyNum);
+
           console.log("enemy hit");
+
           this.game.collisions.push(
             new CollisionAnimation(
               this.game,
