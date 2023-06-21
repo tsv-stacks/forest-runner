@@ -1,5 +1,10 @@
 import { liveHearts } from "./hud.js";
 import {
+  CollisionAnimation,
+  enemyCheck,
+  enemyParticles,
+} from "./collisionAnimation.js";
+import {
   Crouch,
   Fall,
   Idle,
@@ -13,6 +18,7 @@ import {
   SlamGround,
   Hit,
 } from "./playerStates.js";
+import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
 
 class Player {
   constructor(game) {
@@ -27,7 +33,7 @@ class Player {
     this.x = 0;
     this.y = this.game.height - this.viewHeight - this.game.groundMargin;
     this.vy = 0;
-    this.weight = 1;
+    this.weight = 0.5;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -211,6 +217,13 @@ class Player {
       this.currentState.enter();
       this.resetAttackBox();
     }
+    //  collision sprites
+    if (this.game.collisions.length > 0) {
+      this.game.collisions.forEach((collision, index) => {
+        collision.update(deltaTime);
+        if (collision.markedForDeletion) this.game.collisions.splice(index, 1);
+      });
+    }
   }
 
   draw(context) {
@@ -294,7 +307,24 @@ class Player {
           enemy.hitboxY < this.attackBoxY + this.attackBoxHeight &&
           enemy.hitboxY + enemy.hitboxHeight > this.attackBoxY
         ) {
+          let enemyNum = enemyCheck(enemy);
+
           console.log("enemy hit");
+
+          this.game.collisions.push(
+            new CollisionAnimation(
+              this.game,
+              enemy.hitboxX + enemy.hitboxWidth * 0.5 - 20,
+              enemy.hitboxY + enemy.hitboxHeight * 0.5 - 10,
+              enemyParticles[enemyNum].spriteHeight,
+              enemyParticles[enemyNum].spriteWidth,
+              enemyParticles[enemyNum].image,
+              enemyParticles[enemyNum].maxFrame,
+              enemyParticles[enemyNum].fps,
+              enemyParticles[enemyNum].sizeModifier
+            )
+          );
+          console.log(this.game.collisions);
           enemy.death();
         }
       }

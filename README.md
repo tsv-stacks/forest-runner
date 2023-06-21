@@ -1,4 +1,4 @@
-# Forest Runner
+# Into the Forest
 
 ## Credit
 
@@ -39,6 +39,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] player attack detection
 - [ ] Game Over screen
 - [ ] game start screen
+- [ ] collision animation
 
 ## Future Features
 

@@ -22,6 +22,7 @@ window.addEventListener("load", () => {
       this.player = new Player(this);
       this.input = new InputHandler(this);
       this.enemies = [];
+      this.collisions = [];
       this.enemyTimer = 0;
       this.enemyInterval = 2000;
       this.debug = true;
@@ -48,6 +49,11 @@ window.addEventListener("load", () => {
       this.enemies.forEach((enemy) => {
         enemy.draw(context);
       });
+      if (this.collisions.length > 0) {
+        this.collisions.forEach((collision, index) => {
+          collision.draw(context);
+        });
+      }
       this.player.draw(context);
     }
     addEnemy() {

@@ -96,7 +96,7 @@ export class Jump extends State {
   enter() {
     if (this.player.onGround()) {
       this.player.frameX = 0;
-      this.player.vy -= 22;
+      this.player.vy -= 18;
       this.player.frameY = 14;
       this.player.maxFrame = 3;
     }
@@ -119,7 +119,7 @@ export class Fall extends State {
   }
   enter() {
     if (this.player.onGround()) {
-      this.vy -= 22;
+      this.vy -= 18;
     }
     this.player.frameX = 0;
     this.player.frameY = 10;
