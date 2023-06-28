@@ -28,7 +28,9 @@ window.addEventListener("load", () => {
       this.debug = true;
     }
     update(deltaTime) {
-      this.background.update();
+      if (!this.player.isDead) {
+        this.background.update();
+      }
       this.player.update(this.input.keys, deltaTime);
       // enemies
       if (this.enemyTimer > this.enemyInterval) {

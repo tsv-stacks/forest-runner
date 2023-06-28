@@ -29,19 +29,27 @@ export class Idle extends State {
     this.player = player;
   }
   enter() {
-    this.player.frameX = 0;
-    this.player.frameY = 19;
-    this.player.maxFrame = 5;
+    if (this.player.isDead) {
+      this.player.frameX = 0;
+      this.player.frameY = 8;
+      this.player.maxFrame = 5;
+    } else {
+      this.player.frameX = 0;
+      this.player.frameY = 19;
+      this.player.maxFrame = 5;
+    }
   }
   handleInput(input) {
-    if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
-      this.player.setState(states.RUNNING, this.moveSpeed);
-    } else if (input.includes("ArrowDown")) {
-      this.player.setState(states.CROUCH, this.crouchSpeed);
-    } else if (input.includes("ArrowUp")) {
-      this.player.setState(states.JUMP, this.moveSpeed);
-    } else if (input.includes(" ")) {
-      this.player.setState(states.ATTACK1, this.idleSpeed);
+    if (!this.player.isDead) {
+      if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
+        this.player.setState(states.RUNNING, this.moveSpeed);
+      } else if (input.includes("ArrowDown")) {
+        this.player.setState(states.CROUCH, this.crouchSpeed);
+      } else if (input.includes("ArrowUp")) {
+        this.player.setState(states.JUMP, this.moveSpeed);
+      } else if (input.includes(" ")) {
+        this.player.setState(states.ATTACK1, this.idleSpeed);
+      }
     }
   }
 }

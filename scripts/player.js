@@ -146,8 +146,9 @@ class Player {
     this.attackRange();
     this.currentState.handleInput(input);
 
-    if (this.lives === 0) {
+    if (this.lives <= 0) {
       this.isDead = true;
+      if (this.frameX === 5) return;
     }
 
     this.x += this.speed;
