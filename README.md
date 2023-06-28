@@ -27,7 +27,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] draw sword animation on button start
 - [x] hit animation
 - [x] enemy death animation
-- [ ] player death animation
+- [x] player death animation
 - [x] randomise animations / movements for enemies
 - [x] make enemies attack when in range
 - [x] ground enemies attack once or have delay
@@ -47,4 +47,5 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] Pause game toggle
 - [ ] Game Music
 - [ ] Mute button
+- [ ] Background music
 - [ ] Mushroom attacks continously in range but with big cooldown
