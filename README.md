@@ -26,7 +26,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] game start with character on idle
 - [ ] draw sword animation on button start
 - [x] hit animation
-- [ ] death animation
+- [x] enemy death animation
 - [ ] player death animation
 - [x] randomise animations / movements for enemies
 - [x] make enemies attack when in range
@@ -39,7 +39,8 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] player attack detection
 - [ ] Game Over screen
 - [ ] game start screen
-- [ ] collision animation
+- [x] collision animation
+- [ ] change debug mode key binding
 
 ## Future Features
 
