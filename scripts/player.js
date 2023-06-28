@@ -66,7 +66,8 @@ class Player {
     this.hitboxWidth = 35;
     this.hitboxHeight = 57;
 
-    this.lives = 3;
+    this.lives = 1;
+    this.isDead = false;
 
     this.isAttacking = false;
     this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
@@ -144,6 +145,10 @@ class Player {
     this.checkCollision();
     this.attackRange();
     this.currentState.handleInput(input);
+
+    if (this.lives === 0) {
+      this.isDead = true;
+    }
 
     this.x += this.speed;
     // horizontal movement

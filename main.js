@@ -65,7 +65,9 @@ window.addEventListener("load", () => {
       //   }
       // }
       // this.enemies.push(new Mushroom(this));
-      this.enemies.push(new FlyingEye(this));
+      if (!this.player.isDead) {
+        this.enemies.push(new FlyingEye(this));
+      }
       // this.enemies.push(new Goblin(this));
       console.log(this.enemies);
     }
