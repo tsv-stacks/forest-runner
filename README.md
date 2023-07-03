@@ -41,6 +41,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] game start screen
 - [x] collision animation
 - [ ] change debug mode key binding
+- [ ] Find alternate way to add svg icons and use js to update dynamically
 
 ## Future Features
 

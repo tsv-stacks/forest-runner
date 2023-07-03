@@ -18,7 +18,7 @@ import {
   SlamGround,
   Hit,
 } from "./playerStates.js";
-import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
+// import { FlyingEye, Goblin, Mushroom } from "./enemies.js";
 
 class Player {
   constructor(game) {
