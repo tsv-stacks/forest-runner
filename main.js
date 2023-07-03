@@ -26,9 +26,8 @@ window.addEventListener("load", () => {
       this.enemyTimer = 0;
       this.enemyInterval = 2000;
       this.debug = true;
-
       this.paused = false;
-      this.muted = false;
+      this.muted = true;
     }
     update(deltaTime) {
       if (!this.player.isDead) {
@@ -84,6 +83,14 @@ window.addEventListener("load", () => {
   // Button Logic
   document.getElementById("pause-btn").addEventListener("click", pauseBtn);
   document.getElementById("mute-btn").addEventListener("click", muteBtn);
+  document.getElementById("restart-btn").addEventListener("click", restartBtn);
+
+  function restartBtn() {
+    window.confirm(
+      "This will restart the game and reset your score back to 0. \nYour current score will not be submitted.\n\nDo you still wish to restart your game?"
+    );
+    // use t/f logic on confirm()
+  }
 
   function pauseBtn() {
     console.log(document.getElementById("pause-btn__icon").innerHTML);
