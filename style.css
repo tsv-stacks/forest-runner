@@ -42,18 +42,24 @@ html {
   margin: 0 auto;
   width: 95%;
   position: relative;
-  top: 95%;
+  top: 93%;
   display: flex;
   justify-content: flex-end;
 }
 
 .btn {
-  display: block;
+  display: flex;
   margin-right: 5px;
   background-color: black;
   color: white;
+  border: solid 1px white;
 }
 
-.btn embed:hover {
+.btn:hover {
   cursor: pointer;
+}
+
+.btn:active {
+  cursor: pointer;
+  transform: translateY(2px);
 }
