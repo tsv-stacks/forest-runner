@@ -26,6 +26,9 @@ window.addEventListener("load", () => {
       this.enemyTimer = 0;
       this.enemyInterval = 2000;
       this.debug = true;
+
+      this.paused = false;
+      this.muted = false;
     }
     update(deltaTime) {
       if (!this.player.isDead) {
@@ -78,13 +81,46 @@ window.addEventListener("load", () => {
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
 
+  // Button Logic
+  document.getElementById("pause-btn").addEventListener("click", pauseBtn);
+  document.getElementById("mute-btn").addEventListener("click", muteBtn);
+
+  function pauseBtn() {
+    console.log(document.getElementById("pause-btn__icon").innerHTML);
+    if (!game.paused) {
+      console.log("paused");
+      document.getElementById("pause-btn__icon").innerHTML =
+        '<path fill="white" d="M8.5 8.64L13.77 12L8.5 15.36V8.64M6.5 5v14l11-7"/>';
+      game.paused = true;
+    } else if (game.paused) {
+      console.log("unpaused");
+      game.paused = false;
+      document.getElementById("pause-btn__icon").innerHTML =
+        '<path fill="white" d="M13 19V5h6v14h-6Zm-8 0V5h6v14H5Zm10-2h2V7h-2v10Zm-8 0h2V7H7v10ZM7 7v10V7Zm8 0v10V7Z"></path>';
+      animate(lastTime);
+    }
+    document.getElementById("pause-btn").blur();
+  }
+
+  function muteBtn(e) {
+    console.log(e.target);
+    if (!game.muted) {
+      console.log("muted");
+      game.muted = true;
+    } else if (game.muted) {
+      console.log("unmuted");
+      game.muted = false;
+    }
+    document.getElementById("mute-btn").blur();
+  }
+
   function animate(timestamp) {
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.draw(ctx);
     game.update(deltaTime);
-    requestAnimationFrame(animate);
+    if (!game.paused) requestAnimationFrame(animate);
   }
 
   animate(0);

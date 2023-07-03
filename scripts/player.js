@@ -204,7 +204,7 @@ class Player {
         this.currentState.attacks[this.currentState.attackNum].soundPath
       );
       audio.volume = 0.5;
-      audio.play();
+      if (!this.game.muted) audio.play();
     }
 
     if (
