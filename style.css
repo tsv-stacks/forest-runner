@@ -2,9 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 1px solid pink;
 }
 
-#canvas1 {
+html {
+  background-color: rgb(10, 69, 10);
+}
+
+#canvas1,
+#game-container {
   border: 5px solid black;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -18,4 +24,36 @@
 .enemy-image,
 #player {
   display: none;
+}
+
+#game-container {
+  width: 750px;
+  height: 500px;
+  border: none;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: 1px solid pink;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#btn-container {
+  margin: 0 auto;
+  width: 95%;
+  position: relative;
+  top: 95%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  display: block;
+  margin-right: 5px;
+  background-color: black;
+  color: white;
+}
+
+.btn embed:hover {
+  cursor: pointer;
 }

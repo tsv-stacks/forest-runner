@@ -26,8 +26,8 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] game start with character on idle
 - [ ] draw sword animation on button start
 - [x] hit animation
-- [ ] death animation
-- [ ] player death animation
+- [x] enemy death animation
+- [x] player death animation
 - [x] randomise animations / movements for enemies
 - [x] make enemies attack when in range
 - [x] ground enemies attack once or have delay
@@ -39,11 +39,14 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] player attack detection
 - [ ] Game Over screen
 - [ ] game start screen
-- [ ] collision animation
+- [x] collision animation
+- [ ] change debug mode key binding
+- [ ] Find alternate way to add svg icons and use js to update dynamically
 
 ## Future Features
 
 - [ ] Pause game toggle
 - [ ] Game Music
 - [ ] Mute button
+- [ ] Background music
 - [ ] Mushroom attacks continously in range but with big cooldown
