@@ -28,7 +28,6 @@ window.addEventListener("load", () => {
       this.debug = true;
       this.paused = false;
       this.muted = true;
-
       this.gameStarted = false;
     }
     update(deltaTime) {
@@ -91,7 +90,6 @@ window.addEventListener("load", () => {
     .addEventListener("click", startGameBtn);
 
   function startGameBtn() {
-    console.log("start game");
     document.getElementById("game-container__start-game").style.display =
       "none";
     document.getElementById("game-container__logo-text").style.display = "none";
