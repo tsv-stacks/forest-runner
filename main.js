@@ -28,6 +28,8 @@ window.addEventListener("load", () => {
       this.debug = true;
       this.paused = false;
       this.muted = true;
+
+      this.gameStarted = false;
     }
     update(deltaTime) {
       if (!this.player.isDead) {
@@ -36,7 +38,7 @@ window.addEventListener("load", () => {
       this.player.update(this.input.keys, deltaTime);
       // enemies
       if (this.enemyTimer > this.enemyInterval) {
-        this.addEnemy();
+        if (this.gameStarted) this.addEnemy();
         this.enemyTimer = 0;
       } else {
         this.enemyTimer += deltaTime;
@@ -84,6 +86,18 @@ window.addEventListener("load", () => {
   document.getElementById("pause-btn").addEventListener("click", pauseBtn);
   document.getElementById("mute-btn").addEventListener("click", muteBtn);
   document.getElementById("restart-btn").addEventListener("click", restartBtn);
+  document
+    .getElementById("game-container__start-game")
+    .addEventListener("click", startGameBtn);
+
+  function startGameBtn() {
+    console.log("start game");
+    document.getElementById("game-container__start-game").style.display =
+      "none";
+    document.getElementById("game-container__logo-text").style.display = "none";
+    document.getElementById("btn-container").style.top = "93%";
+    game.gameStarted = true;
+  }
 
   function restartBtn() {
     window.confirm(
