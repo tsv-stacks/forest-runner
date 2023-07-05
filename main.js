@@ -26,9 +26,9 @@ window.addEventListener("load", () => {
       this.enemyTimer = 0;
       this.enemyInterval = 2000;
       this.debug = true;
-
       this.paused = false;
-      this.muted = false;
+      this.muted = true;
+      this.gameStarted = false;
     }
     update(deltaTime) {
       if (!this.player.isDead) {
@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
       this.player.update(this.input.keys, deltaTime);
       // enemies
       if (this.enemyTimer > this.enemyInterval) {
-        this.addEnemy();
+        if (this.gameStarted) this.addEnemy();
         this.enemyTimer = 0;
       } else {
         this.enemyTimer += deltaTime;
@@ -84,6 +84,25 @@ window.addEventListener("load", () => {
   // Button Logic
   document.getElementById("pause-btn").addEventListener("click", pauseBtn);
   document.getElementById("mute-btn").addEventListener("click", muteBtn);
+  document.getElementById("restart-btn").addEventListener("click", restartBtn);
+  document
+    .getElementById("game-container__start-game")
+    .addEventListener("click", startGameBtn);
+
+  function startGameBtn() {
+    document.getElementById("game-container__start-game").style.display =
+      "none";
+    document.getElementById("game-container__logo-text").style.display = "none";
+    document.getElementById("btn-container").style.top = "93%";
+    game.gameStarted = true;
+  }
+
+  function restartBtn() {
+    window.confirm(
+      "This will restart the game and reset your score back to 0. \nYour current score will not be submitted.\n\nDo you still wish to restart your game?"
+    );
+    // use t/f logic on confirm()
+  }
 
   function pauseBtn() {
     console.log(document.getElementById("pause-btn__icon").innerHTML);

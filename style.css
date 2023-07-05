@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
 }
 
 html {
@@ -33,7 +33,6 @@ html {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  border: 1px solid pink;
   max-width: 100%;
   max-height: 100%;
 }
@@ -42,14 +41,14 @@ html {
   margin: 0 auto;
   width: 95%;
   position: relative;
-  top: 93%;
+  top: 63%;
   display: flex;
   justify-content: flex-end;
 }
 
 .btn {
   display: flex;
-  margin-right: 5px;
+  margin-right: 10px;
   background-color: black;
   color: white;
   border: solid 1px white;
@@ -57,9 +56,46 @@ html {
 
 .btn:hover {
   cursor: pointer;
+  transform: scale(1.1);
 }
 
 .btn:active {
   cursor: pointer;
   transform: translateY(2px);
+}
+
+#game-container__logo-text {
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 25%;
+  left: 50%;
+}
+
+#game-container__start-game {
+  position: relative;
+  width: 250px;
+  top: 40%;
+  left: -28%;
+  animation: pulse 4s infinite;
+}
+
+#game-container__start-game:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  filter: sepia(100%);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

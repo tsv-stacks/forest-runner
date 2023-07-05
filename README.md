@@ -45,8 +45,8 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 
 ## Future Features
 
-- [ ] Pause game toggle
+- [x] Pause game toggle
 - [ ] Game Music
-- [ ] Mute button
+- [x] Mute button
 - [ ] Background music
 - [ ] Mushroom attacks continously in range but with big cooldown
