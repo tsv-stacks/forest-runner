@@ -316,7 +316,7 @@ class Player {
           let enemyNum = enemyCheck(enemy);
 
           console.log("enemy hit");
-
+          this.game.score += 20;
           this.game.collisions.push(
             new CollisionAnimation(
               this.game,

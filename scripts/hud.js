@@ -22,3 +22,20 @@ export function liveHearts(context, heart, gameWidth, gameHeight) {
     50
   );
 }
+
+export class UI {
+  constructor(game) {
+    this.game = game;
+    this.fontSize = 25;
+    this.fontFamily = "'Press Start 2P', cursive";
+  }
+
+  draw(context) {
+    if (this.game.gameStarted) {
+      context.font = `${this.fontSize}px ${this.fontFamily}, sans-serif`;
+      context.textAlign = "left";
+      context.fillStyle = this.game.fontColor;
+      context.fillText(`SCORE: ${this.game.score}`, 30, 60);
+    }
+  }
+}
