@@ -2,6 +2,7 @@ import { Player } from "./scripts/player.js";
 import InputHandler from "./scripts/input.js";
 import { Background } from "./scripts/background.js";
 import { FlyingEye, Goblin, Mushroom } from "./scripts/enemies.js";
+import { UI } from "./scripts/hud.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -21,6 +22,7 @@ window.addEventListener("load", () => {
       this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler(this);
+      this.UI = new UI(this);
       this.enemies = [];
       this.collisions = [];
       this.enemyTimer = 0;
@@ -29,6 +31,9 @@ window.addEventListener("load", () => {
       this.paused = false;
       this.muted = true;
       this.gameStarted = false;
+
+      this.score = 0;
+      this.fontColor = "#61953f";
     }
     update(deltaTime) {
       if (!this.player.isDead) {
@@ -37,7 +42,10 @@ window.addEventListener("load", () => {
       this.player.update(this.input.keys, deltaTime);
       // enemies
       if (this.enemyTimer > this.enemyInterval) {
-        if (this.gameStarted) this.addEnemy();
+        if (this.gameStarted) {
+          this.addEnemy();
+          if (!this.player.isDead) this.score += 5;
+        }
         this.enemyTimer = 0;
       } else {
         this.enemyTimer += deltaTime;
@@ -60,6 +68,7 @@ window.addEventListener("load", () => {
         });
       }
       this.player.draw(context);
+      this.UI.draw(context);
     }
     addEnemy() {
       // if (this.speed > 0 && Math.random() < 0.5) {
@@ -121,7 +130,7 @@ window.addEventListener("load", () => {
     document.getElementById("pause-btn").blur();
   }
 
-  function muteBtn(e) {
+  function muteBtn() {
     if (!game.muted) {
       console.log("muted");
       document.getElementById(
