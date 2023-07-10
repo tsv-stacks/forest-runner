@@ -195,9 +195,7 @@ class Player {
       let currentAttack = this.attackHitbox.find(
         (e) => e.frameY === this.frameY
       );
-      console.log(
-        this.currentState.attacks[this.currentState.attackNum].soundPath
-      );
+
       console.log(this.currentState);
       console.log(this.isAttacking);
       let audio = new Audio(

@@ -38,10 +38,10 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] define hitboxes for player attacks
 - [x] player attack detection
 - [ ] Game Over screen
-- [ ] game start screen
+- [x] game start screen
 - [x] collision animation
 - [ ] change debug mode key binding
-- [ ] Find alternate way to add svg icons and use js to update dynamically
+- [x] Find alternate way to add svg icons and use js to update dynamically
 
 ## Future Features
 

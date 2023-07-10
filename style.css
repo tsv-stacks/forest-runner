@@ -69,11 +69,25 @@ html {
   transform: translateY(2px);
 }
 
-#game-container__logo-text {
+#game-container__logo-text,
+#game-container__game-over {
   position: relative;
   transform: translate(-50%, -50%);
   top: 25%;
   left: 50%;
+}
+
+#game-container__game-over {
+  display: none;
+}
+
+#game-container__try-again {
+  display: none;
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 21%;
+  animation: pulse 6s infinite;
 }
 
 #game-container__start-game {
