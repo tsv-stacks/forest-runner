@@ -147,6 +147,7 @@ window.addEventListener("load", () => {
     } else {
       return;
     }
+    document.getElementById("restart-btn").blur();
   }
 
   function pauseBtn() {

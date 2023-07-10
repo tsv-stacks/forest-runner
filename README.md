@@ -23,7 +23,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [ ] roll
 - [ ] walking with sword out animation
 - [ ] getting up after slide animation priority
-- [ ] game start with character on idle
+- [x] game start with character on idle
 - [ ] draw sword animation on button start
 - [x] hit animation
 - [x] enemy death animation
@@ -31,7 +31,6 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] randomise animations / movements for enemies
 - [x] make enemies attack when in range
 - [x] ground enemies attack once or have delay
-- [ ] cooldown on attacks
 - [x] sword attack sounds
 - [x] slam attack sound
 - [ ] clean up background.js (Dry)
