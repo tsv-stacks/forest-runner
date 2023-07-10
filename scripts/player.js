@@ -191,12 +191,10 @@ class Player {
     // attack
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
-      let currentAttack = this.attackHitbox.find(
-        (e) => e.frameY === this.frameY
-      );
+      // let currentAttack = this.attackHitbox.find(
+      //   (e) => e.frameY === this.frameY
+      // );
 
-      console.log(this.currentState);
-      console.log(this.isAttacking);
       let audio = new Audio(
         this.currentState.attacks[this.currentState.attackNum].soundPath
       );
@@ -312,7 +310,6 @@ class Player {
         ) {
           let enemyNum = enemyCheck(enemy);
 
-          console.log("enemy hit");
           this.game.score += 20;
           this.game.collisions.push(
             new CollisionAnimation(
@@ -327,7 +324,6 @@ class Player {
               enemyParticles[enemyNum].sizeModifier
             )
           );
-          console.log(this.game.collisions);
           enemy.death();
         }
       }
@@ -341,7 +337,6 @@ class Player {
           enemy.attackBoxY + enemy.attackBoxHeight > this.hitboxY &&
           (enemy.frameY === 0 || enemy.frameY === 1)
         ) {
-          console.log("attacked");
           this.setState(11, 0);
           enemy.hasCollided = true;
           this.lives--;
@@ -353,7 +348,6 @@ class Player {
           enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
           enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
         ) {
-          console.log("collision");
           this.setState(11, 0);
           enemy.hasCollided = true;
           this.lives--;

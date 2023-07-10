@@ -50,6 +50,7 @@ export class Background {
     this.layer9image = document.getElementById("layer9");
     this.layer10image = document.getElementById("layer10");
     this.layer11image = document.getElementById("layer11");
+
     this.layer0 = new Layer(
       this.game,
       this.width,
