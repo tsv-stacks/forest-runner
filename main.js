@@ -27,17 +27,22 @@ window.addEventListener("load", () => {
       this.collisions = [];
       this.enemyTimer = 0;
       this.enemyInterval = 2000;
-      this.debug = true;
+      this.debug = false;
       this.paused = false;
       this.muted = true;
       this.gameStarted = false;
 
       this.score = 0;
       this.fontColor = "#61953f";
+
+      this.gameover = false;
     }
+
     update(deltaTime) {
       if (!this.player.isDead) {
         this.background.update();
+      } else {
+        this.over();
       }
       this.player.update(this.input.keys, deltaTime);
       // enemies
@@ -57,6 +62,7 @@ window.addEventListener("load", () => {
         }
       });
     }
+
     draw(context) {
       this.background.draw(context);
       this.enemies.forEach((enemy) => {
@@ -70,6 +76,7 @@ window.addEventListener("load", () => {
       this.player.draw(context);
       this.UI.draw(context);
     }
+
     addEnemy() {
       // if (this.speed > 0 && Math.random() < 0.5) {
       //   this.enemies.push(new Mushroom(this));
@@ -84,6 +91,31 @@ window.addEventListener("load", () => {
       }
       // this.enemies.push(new Goblin(this));
       console.log(this.enemies);
+    }
+
+    over() {
+      this.gameover = true;
+      document.getElementById("game-container__game-over").style.display =
+        "block";
+      document.getElementById("game-container__try-again").style.display =
+        "block";
+      document.getElementById("btn-container").style.top = "53%";
+    }
+
+    restart() {
+      console.log("restart game");
+      this.player.lives = 3;
+      this.player.isDead = false;
+      this.player.currentState = this.player.states[0];
+      this.player.currentState.enter();
+      this.player.isAttacking = false;
+      this.score = 0;
+      document.getElementById("game-container__game-over").style.display =
+        "none";
+      document.getElementById("game-container__try-again").style.display =
+        "none";
+      document.getElementById("btn-container").style.top = "93%";
+      this.enemies = [];
     }
   }
 
@@ -107,10 +139,14 @@ window.addEventListener("load", () => {
   }
 
   function restartBtn() {
-    window.confirm(
+    let restartConfirmation = window.confirm(
       "This will restart the game and reset your score back to 0. \nYour current score will not be submitted.\n\nDo you still wish to restart your game?"
     );
-    // use t/f logic on confirm()
+    if (restartConfirmation) {
+      game.restart();
+    } else {
+      return;
+    }
   }
 
   function pauseBtn() {
