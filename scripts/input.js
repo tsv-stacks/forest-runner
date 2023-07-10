@@ -15,6 +15,9 @@ class InputHandler {
         this.keys.push(e.key);
       } else if (e.key === "d") {
         this.game.debug = !this.game.debug;
+      } else if (e.key === "Enter" && this.game.gameover === true) {
+        this.game.gameover = false;
+        this.game.restart();
       }
     });
 

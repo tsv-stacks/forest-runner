@@ -67,7 +67,7 @@ export const enemyParticles = [
     spriteHeight: 48,
     spriteWidth: 48,
     image: document.getElementById("enemy-eye-particle"),
-    maxFrame: 5,
+    maxFrame: 4,
     fps: 15,
     sizeModifier: 1,
   },
@@ -91,13 +91,10 @@ export const enemyParticles = [
 
 export function enemyCheck(enemy) {
   if (enemy instanceof FlyingEye) {
-    console.log("flying enemy");
     return 0;
   } else if (enemy instanceof Mushroom) {
-    console.log("mushroom");
     return 1;
   } else if (enemy instanceof Goblin) {
-    console.log("goblin");
     return 2;
   }
 }

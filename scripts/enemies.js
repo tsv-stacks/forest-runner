@@ -5,27 +5,20 @@ class Enemy {
     this.fps = 10;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
-
     this.width = 150;
     this.height = 150;
-
     this.scale = 2;
     this.viewWidth = this.width * this.scale;
     this.viewHeight = this.height * this.scale;
-
     this.markedForDeletion = false;
     this.hasCollided = false;
     this.isAttacking = false;
-
     this.attackAnimationCount = 0;
-
     this.attackBoxX = 0;
     this.attackBoxY = 0;
     this.attackBoxWidth = 0;
     this.attackBoxHeight = 0;
-
     this.isDead = false;
-
     this.vy = 5;
     this.weight = 1;
   }
@@ -132,21 +125,14 @@ export class FlyingEye extends Enemy {
     this.frameY = 3;
     this.maxFrame = 7;
     this.image = document.getElementById("flyingEye");
-
     this.x = this.game.width;
     this.y = Math.random() * this.game.height * 0.5 - 80;
-
     this.angle = 0;
     this.va = Math.random() * 0.1 + 0.1;
-
-    // delete
-    // this.frameY = 1;
-
     this.hitboxX = this.x + 115;
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 60;
     this.hitboxHeight = 37;
-
     this.attackFrame = [5, 6];
     this.attackY = [0, 1];
   }
@@ -222,16 +208,10 @@ export class Goblin extends Enemy {
     this.speedY = 0;
     this.frameY = 3;
     this.maxFrame = 3;
-
-    // delete
-    // this.frameY = 1;
-    // this.maxFrame = 7;
-
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 132;
     this.hitboxWidth = 37;
     this.hitboxHeight = 72;
-
     this.attackFrame = [6, 7];
     this.attackY = [0, 1];
   }
@@ -305,15 +285,10 @@ export class Mushroom extends Enemy {
     this.speedY = 0;
     this.frameY = 4;
     this.maxFrame = 7;
-
-    // delete
-    // this.frameY = 1;
-
     this.hitboxX = this.x + 125;
     this.hitboxY = this.y + 106;
     this.hitboxWidth = 39;
     this.hitboxHeight = 85;
-
     this.attackFrame = [6, 7];
     this.attackY = [0, 1];
   }
