@@ -1,7 +1,3 @@
-#game-guide * {
-  border: 1px solid pink;
-}
-
 #game-guide {
   position: absolute;
   width: 750px;
@@ -63,6 +59,13 @@
   text-decoration: none;
 }
 
+.game-guide__context {
+  text-align: center;
+  margin: 0 auto;
+  font-size: x-small;
+  font-style: italic;
+}
+
 .game-guide__me-img {
   border-radius: 25px;
   width: 40%;
@@ -75,10 +78,22 @@
   margin: 0 auto;
 }
 
+#game-guide__keys {
+  max-width: 60%;
+  margin: 15% auto;
+  height: 40px;
+}
+
 #game-guide__hearts {
   width: 60%;
   margin: 0 auto;
   margin-top: 21%;
+}
+
+#game-guide__slam-keys {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fa-icons {
