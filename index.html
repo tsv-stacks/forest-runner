@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Into the Forest</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/guide.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -47,7 +52,54 @@
   </head>
   <body>
     <canvas id="canvas1" class="canvas1"></canvas>
+
     <div id="game-container">
+      <div id="game-guide">
+        <div class="div1"><p id="game-guide__title">Move</p></div>
+        <div class="div2">
+          <p id="game-guide__title">Jump</p>
+        </div>
+        <div class="div3">
+          <p id="game-guide__title">Attack</p>
+        </div>
+        <div class="div4">
+          <p id="game-guide__title">Slam</p>
+        </div>
+        <div class="div5">
+          <p id="game-guide__title">Slide</p>
+        </div>
+        <div class="div6">
+          <p id="game-guide__title">Lives</p>
+        </div>
+        <div class="div7"></div>
+
+        <div class="div8">
+          <p id="game-guide__title">Created by:</p>
+          <img
+            src="./assets/icons/guide/me-pixel.png"
+            alt="picture of me pixelated"
+            class="game-guide__me-img"
+          />
+          <p id="game-guide__me-name">Tarndeep V</p>
+          <div class="fa-icons">
+            <a
+              href="https://www.linkedin.com/in/tarndeep-virdi/"
+              target="_blank"
+              class="fa-2x icon fa fa-linkedin-square"
+            ></a>
+            <a
+              href="https://github.com/tsv-stacks"
+              target="_blank"
+              class="fa-2x icon fa fa-github-square"
+            ></a>
+            <a
+              href="https://twitter.com/tsv_stacks"
+              target="_blank"
+              class="fa-2x icon fa fa-twitter-square"
+            ></a>
+          </div>
+        </div>
+      </div>
       <img
         src="./assets/icons/IntoTheForest.png"
         id="game-container__logo-text"
@@ -56,6 +108,21 @@
       <img src="./assets/icons/gameover.png" id="game-container__game-over" />
       <img src="./assets/icons/tryagain.png" id="game-container__try-again" />
       <div id="btn-container">
+        <button title="Guide" class="btn info-btn" id="info-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="2em"
+            height="2em"
+            class="btn-svg"
+            viewBox="0 0 32 32"
+          >
+            <path
+              fill="white"
+              d="M16 4c-2.2 0-4 1.8-4 4s1.8 4 4 4s4-1.8 4-4s-1.8-4-4-4zm0 2c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2zm-5 7v5h2v5h-2v5h10v-5h-2V13zm2 2h4v10h2v1h-6v-1h2v-9h-2z"
+            />
+          </svg>
+        </button>
+
         <button title="Pause / Play" class="btn pause-btn" id="pause-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
