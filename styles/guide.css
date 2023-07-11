@@ -3,7 +3,6 @@
 }
 
 #game-guide {
-  border: 1px solid pink;
   position: absolute;
   width: 750px;
   height: 500px;
@@ -56,10 +55,12 @@
   text-align: center;
   margin: 5% auto;
   font-size: smaller;
+  text-decoration: underline;
 }
 
 #game-guide__me-name {
   font-style: italic;
+  text-decoration: none;
 }
 
 .game-guide__me-img {
@@ -72,6 +73,9 @@
 .fa-icons {
   display: flex;
   justify-content: space-evenly;
+  width: 80%;
+  max-width: 80%;
+  margin: 5% auto;
 }
 
 .icon {
