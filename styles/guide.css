@@ -70,6 +70,17 @@
   border: 1px solid black;
 }
 
+#game-guide__gif {
+  width: 60%;
+  margin: 0 auto;
+}
+
+#game-guide__hearts {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 21%;
+}
+
 .fa-icons {
   display: flex;
   justify-content: space-evenly;
