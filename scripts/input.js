@@ -13,7 +13,7 @@ class InputHandler {
         this.keys.indexOf(e.key) === -1
       ) {
         this.keys.push(e.key);
-      } else if (e.key === "d") {
+      } else if (e.key === ";") {
         this.game.debug = !this.game.debug;
       } else if (e.key === "Enter" && this.game.gameover === true) {
         this.game.gameover = false;

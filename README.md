@@ -1,5 +1,9 @@
 # Into the Forest
 
+Debug Mode can be trigged with the ';' button on keyboard
+
+## Development
+
 ## Credit
 
 Artwork created by Eder Muniz
@@ -20,11 +24,10 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] attack on space bar key
 - [x] air vs ground attack
 - [x] slam attack
-- [ ] roll
+- [ ] roll (double-tap down button)
 - [ ] walking with sword out animation
 - [ ] getting up after slide animation priority
 - [x] game start with character on idle
-- [ ] draw sword animation on button start
 - [x] hit animation
 - [x] enemy death animation
 - [x] player death animation
@@ -33,15 +36,15 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] ground enemies attack once or have delay
 - [x] sword attack sounds
 - [x] slam attack sound
-- [ ] clean up background.js (Dry)
 - [x] define hitboxes for player attacks
 - [x] player attack detection
-- [ ] Game Over screen
+- [x] Game Over screen
 - [x] game start screen
 - [x] collision animation
-- [ ] change debug mode key binding
+- [x] change debug mode key binding
 - [x] Find alternate way to add svg icons and use js to update dynamically
-- [ ] 'i' button with controls
+- [x] 'i' button with controls
+- [ ] increase difficulty as score increases
 
 ## Future Features
 
