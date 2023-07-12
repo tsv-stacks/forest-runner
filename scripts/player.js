@@ -65,7 +65,7 @@ class Player {
     this.hitboxWidth = 35;
     this.hitboxHeight = 57;
 
-    this.lives = 1;
+    this.lives = 3;
     this.isDead = false;
 
     this.isAttacking = false;
@@ -191,9 +191,6 @@ class Player {
     // attack
     if (this.attackYFrames.includes(this.frameY) && !this.isAttacking) {
       this.isAttacking = true;
-      // let currentAttack = this.attackHitbox.find(
-      //   (e) => e.frameY === this.frameY
-      // );
 
       let audio = new Audio(
         this.currentState.attacks[this.currentState.attackNum].soundPath

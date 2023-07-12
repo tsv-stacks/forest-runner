@@ -49,19 +49,20 @@ html {
   top: 63%;
   display: flex;
   justify-content: flex-end;
+  z-index: 2;
 }
 
 .btn {
   display: flex;
   margin-right: 10px;
   background-color: black;
-  color: white;
   border: solid 1px white;
 }
 
 .btn:hover {
   cursor: pointer;
   transform: scale(1.1);
+  border: 1px solid #61953f;
 }
 
 .btn:active {
