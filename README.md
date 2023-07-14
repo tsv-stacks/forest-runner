@@ -18,6 +18,10 @@ Enemies created by LuizMelo
 
 https://luizmelo.itch.io/monsters-creatures-fantasy
 
+UI Sounds created by Ellr
+
+https://ellr.itch.io/universal-ui-soundpack
+
 ## To Do
 
 - [ ] way to chain attacks
@@ -51,5 +55,6 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] Pause game toggle
 - [ ] Game Music
 - [x] Mute button
+- [x] UI Sounds
 - [ ] Background music
 - [ ] Mushroom attacks continously in range but with big cooldown
