@@ -70,6 +70,7 @@ class Player {
 
     this.isAttacking = false;
     this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
+    this.isRunningSoundPlaying = false;
 
     this.attackBoxX = this.hitboxX;
     this.attackBoxY = this.hitboxY;
@@ -152,6 +153,9 @@ class Player {
 
     this.x += this.speed;
     // horizontal movement
+
+    // const runningAudio = new Audio("./assets/sounds/running-footsteps.mp3");
+
     if (input.includes("ArrowRight")) {
       this.speed = this.maxSpeed;
     } else if (input.includes("ArrowLeft")) {

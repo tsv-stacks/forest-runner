@@ -44,7 +44,7 @@ https://luizmelo.itch.io/monsters-creatures-fantasy
 - [x] change debug mode key binding
 - [x] Find alternate way to add svg icons and use js to update dynamically
 - [x] 'i' button with controls
-- [ ] increase difficulty as score increases
+- [x] increase difficulty as score increases
 
 ## Future Features
 

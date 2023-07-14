@@ -79,9 +79,27 @@ window.addEventListener("load", () => {
 
     addEnemy() {
       if (!this.player.isDead) {
-        const mushroomProbability = 0.5;
-        const goblinProbability = 0.2;
-        const flyingEyeProbability = 1;
+        let mushroomProbability = 0.4;
+        let goblinProbability = 0.2;
+        let flyingEyeProbability = 0.8;
+
+        if (game.score > 500) {
+          mushroomProbability = 0.5;
+          goblinProbability = 0.3;
+          flyingEyeProbability = 0.9;
+        } else if (game.score > 1000) {
+          mushroomProbability = 0.6;
+          goblinProbability = 0.4;
+          flyingEyeProbability = 1;
+        } else if (game.score > 1500) {
+          mushroomProbability = 0.7;
+          goblinProbability = 0.5;
+          flyingEyeProbability = 1;
+        } else if (game.score > 2000) {
+          mushroomProbability = 0.8;
+          goblinProbability = 0.6;
+          flyingEyeProbability = 1;
+        }
 
         const randomValue = Math.random();
 
