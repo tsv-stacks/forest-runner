@@ -22,23 +22,12 @@ I wanted to build on the success of my previous two games and take the lessons I
 
 This game was built over a period of six weeks and builds on everything I created in the second game. Players and enemies have more animations, buttons control the game, UI sounds, attacking sounds, hitboxes and attacks for both player and enemies. Spawning enemies is no longer random, there is a debug mode, and many more tweaks and adjustments that I hope make this game more enjoyable and fun to play than the last.
 
-## Credit
+## Credits
 
-Artwork created by Eder Muniz
-
-https://edermunizz.itch.io/free-pixel-art-forest
-
-Player Character created by rvros
-
-https://rvros.itch.io/animated-pixel-hero
-
-Enemies created by LuizMelo
-
-https://luizmelo.itch.io/monsters-creatures-fantasy
-
-UI Sounds created by Ellr
-
-https://ellr.itch.io/universal-ui-soundpack
+- Artwork created by [Eder Muniz](https://edermunizz.itch.io/free-pixel-art-forest)
+- Player Character created by [rvros](https://rvros.itch.io/animated-pixel-hero)
+- Enemies created by [LuizMelo](https://luizmelo.itch.io/monsters-creatures-fantasy)
+- UI Sounds created by [Ellr](https://ellr.itch.io/universal-ui-soundpack)
 
 ## To Do
 
@@ -67,6 +56,7 @@ https://ellr.itch.io/universal-ui-soundpack
 - [x] Find alternate way to add svg icons and use js to update dynamically
 - [x] 'i' button with controls
 - [x] increase difficulty as score increases
+- [x] Stop all hit detection and collision detection when player is dead
 
 ## Future Features
 

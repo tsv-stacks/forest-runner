@@ -347,7 +347,8 @@ class Player {
           enemy.hitboxX < this.hitboxX + this.hitboxWidth &&
           enemy.hitboxX + enemy.hitboxWidth > this.hitboxX &&
           enemy.hitboxY < this.hitboxY + this.hitboxHeight &&
-          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY
+          enemy.hitboxY + enemy.hitboxHeight > this.hitboxY &&
+          !this.isDead
         ) {
           this.setState(11, 0);
           enemy.hasCollided = true;
@@ -364,7 +365,8 @@ class Player {
           enemy.x < this.hitboxX + this.hitboxWidth &&
           enemy.x + enemy.viewWidth > this.hitboxX &&
           enemy.y < this.hitboxY + this.hitboxHeight &&
-          enemy.y + enemy.viewHeight - 80 > this.hitboxY
+          enemy.y + enemy.viewHeight - 80 > this.hitboxY &&
+          !this.isDead
         ) {
           enemy.isAttacking = true;
         }
