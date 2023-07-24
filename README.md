@@ -65,4 +65,4 @@ This game was built over a period of six weeks and builds on everything I create
 - [x] Mute button
 - [x] UI Sounds
 - [ ] Background music
-- [ ] Mushroom attacks continously in range but with big cooldown
+- [ ] Better Enemy 'AI'
