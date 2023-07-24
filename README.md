@@ -16,6 +16,12 @@ Debug Mode can be trigged with the ';' button on keyboard
 I found a short tutorial that showed me how to create a basic version of the "dinosaur" Google Chrome game. The game was an endless runner, with oncoming blocks that I had to jump over. It was a simple game, but it was a proof of concept that games could be built with JavaScript.
 
 <center>
+  
+![ezgif com-video-to-gif (2)](https://github.com/tsv-stacks/forest-runner/assets/113384739/8c356abb-b503-4f4f-8d9c-43f99734f247)
+> The game can be started by clicking the `Start` button. Once the game starts, the character can be made to jump by pressing the `Space` key on your keyboard. The game ends if the character collides with the block.
+</center>
+
+<center>
 
 ### _[My Second Game](https://arcade-game-runner.netlify.app/)_
 
