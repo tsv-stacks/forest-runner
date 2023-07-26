@@ -71,6 +71,7 @@ class Player {
     this.isAttacking = false;
     this.attackYFrames = [0, 1, 2, 3, 4, 5, 6];
     this.isRunningSoundPlaying = false;
+    this.deathSound = false;
 
     this.attackBoxX = this.hitboxX;
     this.attackBoxY = this.hitboxY;
@@ -146,8 +147,9 @@ class Player {
     this.attackRange();
     this.currentState.handleInput(input);
 
+    // death
     if (this.lives <= 0) {
-      this.isDead = true;
+      this.death();
       if (this.frameX === 5) return;
     }
 
@@ -226,6 +228,23 @@ class Player {
         if (collision.markedForDeletion) this.game.collisions.splice(index, 1);
       });
     }
+  }
+
+  death() {
+    let audio = new Audio("./assets/sounds/player-sounds/death-sounds.mp3");
+    audio.volume = 0.2;
+    if (!this.game.muted && !this.deathSound) {
+      audio.play();
+    }
+    this.isDead = true;
+    this.deathSound = true;
+  }
+
+  reset() {
+    this.deathSound = false;
+    this.lives = 3;
+    this.isDead = false;
+    this.isAttacking = false;
   }
 
   draw(context) {
