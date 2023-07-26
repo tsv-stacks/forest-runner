@@ -115,6 +115,10 @@ This game was built over a period of six weeks, building on everything I created
 - Enemies created by [LuizMelo](https://luizmelo.itch.io/monsters-creatures-fantasy)
 - UI Sounds created by [Ellr](https://ellr.itch.io/universal-ui-soundpack)
 
-## Contact Me
+## Contact me
+
+If you encounter any issues or bugs, or have any suggestions for improving this project, please feel free to contact me on [twitter](https://twitter.com/tsv_stacks).
+
+You can also submit an issue on this repository to report any bugs or suggest new features. Please provide as much detail as possible, including any error messages and steps to reproduce the issue.
 
 ## License
