@@ -203,6 +203,13 @@ window.addEventListener("load", () => {
       if (restartConfirmation) {
         if (!game.muted) clickOpen.play();
         game.restart();
+        if (game.paused) {
+          game.paused = false;
+          if (!game.muted) clickOpen.play();
+          document.getElementById("pause-btn__icon").innerHTML =
+            '<path fill="white" d="M13 19V5h6v14h-6Zm-8 0V5h6v14H5Zm10-2h2V7h-2v10Zm-8 0h2V7H7v10ZM7 7v10V7Zm8 0v10V7Z"></path>';
+          animate(lastTime);
+        }
       } else {
         if (!game.muted) clickClose.play();
         return;

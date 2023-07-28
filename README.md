@@ -9,14 +9,13 @@
 1. [About](#about)
 2. [Controls](#controls)
 3. [Development](#development)
-    * [My First Game](#my-first-game)
-    * [My Second Game](#my-second-game)
-    * [Into the Forest](#into-the-forest)
+   - [My First Game](#my-first-game)
+   - [My Second Game](#my-second-game)
+   - [Into the Forest](#into-the-forest)
 4. [Future Features](#future-features)
 5. [Credit](#credits)
 6. [Contact Me](#contact-me)
 7. [License](#license)
-
 
 ## About
 
@@ -37,9 +36,11 @@ Debug Mode can be trigged with the ';' button on keyboard
 I found a short tutorial that showed me how to create a basic version of the "dinosaur" Google Chrome game. The game was an endless runner, with oncoming blocks that I had to jump over. It was a simple game, but it was a proof of concept that games could be built with JavaScript.
 
 <center>
-  
+
 ![ezgif com-video-to-gif (2)](https://github.com/tsv-stacks/forest-runner/assets/113384739/8c356abb-b503-4f4f-8d9c-43f99734f247)
+
 > The game can be started by clicking the `Start` button. Once the game starts, the character can be made to jump by pressing the `Space` key on your keyboard. The game ends if the character collides with the block.
+
 </center>
 
 <center>
@@ -55,6 +56,7 @@ I wanted to make this game feel unique and rather than copy someones code or cod
 Unfortunately, due to time constraints, I was not able to fully flesh out the game as much as I would have liked. There were multiple features and functionalities missing that would have made it a complete game.
 
 ![ezgif com-optimize (1)](https://github.com/tsv-stacks/forest-runner/assets/113384739/f953a4bd-9ac5-43eb-bc3f-f0ac230b3979)
+
 > Jump over the incoming slime enemies by using the arrow keys on your keyboard to control the player. You have 3 lives and you lose a life every time you collide with an enemy. The game ends if the player loses all three lives. To restart the game after the game over, the player can press the Enter key.
 
 <center>
@@ -66,8 +68,6 @@ Unfortunately, due to time constraints, I was not able to fully flesh out the ga
 I wanted to build on the success of my previous two games and take the lessons I learned from building a local cooperative [two-player fighting game](https://github.com/tsv-stacks/fighting-game) to create the game I had envisioned, but was unable to do so due to time constraints.
 
 This game was built over a period of six weeks, building on everything I created in the second game. The player now has many more animations and movements, and there are more attacks, each with their own hitboxes and sound effects. Enemies now have more animations and do not just sit in an idle animation. They will attack the player or at least attempt to when the player is within a certain range. I have added an in-game guide, mute, pause, and reset buttons, all with UI sounds to provide audio feedback to players. To help with hitboxes and collisions, I created a debug mode that can be triggered with the semicolon `;` button. Spawning enemies is no longer random. At certain scores, the probability of enemies spawning is increased. These changes, along with many more tweaks and adjustments, I hope make this game more enjoyable and fun to play than the last.
-
-
 
 ## To Do
 
@@ -114,6 +114,7 @@ This game was built over a period of six weeks, building on everything I created
 - Player Character created by [rvros](https://rvros.itch.io/animated-pixel-hero)
 - Enemies created by [LuizMelo](https://luizmelo.itch.io/monsters-creatures-fantasy)
 - UI Sounds created by [Ellr](https://ellr.itch.io/universal-ui-soundpack)
+- Player Sounds created by [Darkworld Audio](https://darkworldaudio.itch.io/sound-effects-survival-i)
 
 ## Contact me
 
