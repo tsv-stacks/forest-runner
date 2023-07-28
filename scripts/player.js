@@ -304,6 +304,12 @@ class Player {
     }
   }
 
+  playerSound(sound) {
+    let audio = new Audio(sound);
+    audio.volume = 0.2;
+    if (!this.game.muted) audio.play();
+  }
+
   resetAttackBox() {
     this.attackBoxX = 0;
     this.attackBoxY = 0;
@@ -359,6 +365,7 @@ class Player {
         ) {
           this.setState(11, 0);
           enemy.hasCollided = true;
+          this.playerSound("./assets/sounds/player-sounds/player-injured.mp3");
           this.lives--;
         }
         // enemy colliding with player
@@ -371,6 +378,9 @@ class Player {
         ) {
           this.setState(11, 0);
           enemy.hasCollided = true;
+          this.playerSound(
+            "./assets/sounds/player-sounds/player-injured-2.mp3"
+          );
           this.lives--;
         }
       }
