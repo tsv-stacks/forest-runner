@@ -291,6 +291,11 @@ export class Mushroom extends Enemy {
     this.hitboxHeight = 85;
     this.attackFrame = [6, 7];
     this.attackY = [0, 1];
+    this.attackSounds = {
+      bite: "./assets/sounds/enemy-sounds/monster-bite.mp3",
+      slap: "./assets/sounds/enemy-sounds/monster-slap.mp3",
+    };
+    this.hasAttacked = false;
   }
 
   update(deltaTime) {
@@ -317,9 +322,20 @@ export class Mushroom extends Enemy {
       this.attackFrame.includes(this.frameX)
     ) {
       if (this.frameY === 0) {
+        if (!this.game.muted && !this.hasAttacked) {
+          let audio = new Audio(this.attackSounds.slap);
+          audio.play();
+          this.hasAttacked = true;
+        }
         this.attackBoxX = this.hitboxX - 50;
       } else {
         this.attackBoxX = this.hitboxX - 60;
+        if (!this.game.muted && !this.hasAttacked) {
+          let audio = new Audio(this.attackSounds.bite);
+          audio.volume = 0.7;
+          audio.play();
+          this.hasAttacked = true;
+        }
       }
       this.attackBoxY = this.hitboxY + 20;
       this.attackBoxWidth = this.hitboxWidth + 30;
