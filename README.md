@@ -96,7 +96,7 @@ This game was built over a period of six weeks, building on everything I created
 - [x] Find alternate way to add svg icons and use js to update dynamically
 - [x] increase difficulty as score increases
 - [x] Stop all hit detection and collision detection when player is dead
-- [ ] Fixe restart button
+- [ ] Fix restart button
 
 ## Future Features
 

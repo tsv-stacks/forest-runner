@@ -133,9 +133,9 @@ window.addEventListener("load", () => {
 
     restart() {
       if (!game.muted) gameStartSound.play();
+      this.player.reset();
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
-      this.player.reset();
       this.score = 0;
       document.getElementById("game-container__game-over").style.display =
         "none";

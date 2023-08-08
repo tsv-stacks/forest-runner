@@ -214,6 +214,10 @@ export class Goblin extends Enemy {
     this.hitboxHeight = 72;
     this.attackFrame = [6, 7];
     this.attackY = [0, 1];
+    this.attackSounds = {
+      slash: "./assets/sounds/enemy-sounds/goblin-slash.mp3",
+    };
+    this.hasAttacked = false;
   }
 
   update(deltaTime) {
@@ -241,11 +245,25 @@ export class Goblin extends Enemy {
       this.attackBoxY = this.hitboxY + 20;
       this.attackBoxWidth = this.hitboxWidth + 50;
       this.attackBoxHeight = this.hitboxHeight - 20;
+
+      if (!this.game.muted && !this.hasAttacked) {
+        let audio = new Audio(this.attackSounds.slash);
+        audio.volume = 0.8;
+        audio.play();
+        this.hasAttacked = true;
+      }
     } else if (this.frameY === 1 && this.attackFrame.includes(this.frameX)) {
       this.attackBoxX = this.hitboxX - 95;
       this.attackBoxY = this.hitboxY + 18;
       this.attackBoxWidth = this.hitboxWidth + 55;
       this.attackBoxHeight = this.hitboxHeight - 20;
+
+      if (!this.game.muted && !this.hasAttacked) {
+        let audio = new Audio(this.attackSounds.slash);
+        audio.volume = 0.8;
+        audio.play();
+        this.hasAttacked = true;
+      }
     } else {
       this.resetAttackBox();
     }
