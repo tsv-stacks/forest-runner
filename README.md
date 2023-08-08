@@ -94,10 +94,9 @@ This game was built over a period of six weeks, building on everything I created
 - [x] collision animation
 - [x] change debug mode key binding
 - [x] Find alternate way to add svg icons and use js to update dynamically
-- [x] 'i' button with controls
 - [x] increase difficulty as score increases
 - [x] Stop all hit detection and collision detection when player is dead
-- [ ] make the i key open the guide
+- [ ] Fix restart button
 
 ## Future Features
 
