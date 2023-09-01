@@ -97,7 +97,7 @@ This game was built over a period of six weeks, building on everything I created
 - [x] increase difficulty as score increases
 - [x] Stop all hit detection and collision detection when player is dead
 - [x] Fix restart button
-- [ ] Enemy death sounds
+- [x] Enemy death sounds
 
 ## Future Features
 

@@ -21,6 +21,7 @@ class Enemy {
     this.isDead = false;
     this.vy = 5;
     this.weight = 1;
+    this.deathSoundPlayed = false;
   }
 
   death() {
@@ -137,6 +138,15 @@ export class FlyingEye extends Enemy {
     this.attackY = [0, 1];
   }
 
+  death() {
+    super.death();
+    if (!this.deathSoundPlayed) {
+      let audio = new Audio("./assets/sounds/enemy-sounds/flying-death.mp3");
+      audio.play();
+      this.deathSoundPlayed = true;
+    }
+  }
+
   update(deltaTime) {
     super.update(deltaTime);
     this.angle += this.va;
@@ -218,6 +228,15 @@ export class Goblin extends Enemy {
       slash: "./assets/sounds/enemy-sounds/goblin-slash.mp3",
     };
     this.hasAttacked = false;
+  }
+
+  death() {
+    super.death();
+    if (!this.deathSoundPlayed) {
+      let audio = new Audio("./assets/sounds/enemy-sounds/goblin-death.mp3");
+      audio.play();
+      this.deathSoundPlayed = true;
+    }
   }
 
   update(deltaTime) {
@@ -314,6 +333,16 @@ export class Mushroom extends Enemy {
       slap: "./assets/sounds/enemy-sounds/monster-slap.mp3",
     };
     this.hasAttacked = false;
+  }
+
+  death() {
+    super.death();
+    if (!this.deathSoundPlayed) {
+      let audio = new Audio("./assets/sounds/enemy-sounds/mushroom-death.mp3");
+      audio.volume = 0.5;
+      audio.play();
+      this.deathSoundPlayed = true;
+    }
   }
 
   update(deltaTime) {
