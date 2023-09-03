@@ -65,39 +65,19 @@ Unfortunately, due to time constraints, I was not able to fully flesh out the ga
 
 </center>
 
-I wanted to build on the success of my previous two games and take the lessons I learned from building a local cooperative [two-player fighting game](https://github.com/tsv-stacks/fighting-game) to create the game I had envisioned, but was unable to do so due to time constraints.
+I wanted to build on the success of my previous two games and take the lessons I learned from building a local cooperative [two-player fighting game](https://github.com/tsv-stacks/fighting-game) to create a more 'complete' game, but was unable to do so due to time constraints.
 
-This game was built over a period of six weeks, building on everything I created in the second game. The player now has many more animations and movements, and there are more attacks, each with their own hitboxes and sound effects. Enemies now have more animations and do not just sit in an idle animation. They will attack the player or at least attempt to when the player is within a certain range. I have added an in-game guide, mute, pause, and reset buttons, all with UI sounds to provide audio feedback to players. To help with hitboxes and collisions, I created a debug mode that can be triggered with the semicolon `;` button. Spawning enemies is no longer random. At certain scores, the probability of enemies spawning is increased. These changes, along with many more tweaks and adjustments, I hope make this game more enjoyable and fun to play than the last.
+Into the Forest was built as an improved version that enhances and refines the features and gameplay mechanics from the second game: 
+- The player now has many more animations and movements, and there are more attacks, each with their own hitboxes and sound effects.
+- Enemies now have more animations and do not just sit in an idle animation; they will attack the player or attempt to when the player is within a certain range.
+- I have added an in-game guide, mute, pause, and reset buttons, all with UI sounds to provide audio feedback to players.
+- To help with hitboxes and collisions, I created a debug mode that can be triggered with the semicolon `;` button.
+- Spawning enemies is no longer random. At certain scores, the probability of enemies spawning is increased.
+- Made changes to existing sprites to adjust animations using image editors
 
-## To Do
+These changes, along with many more tweaks and adjustments, I hope make this game more enjoyable and fun to play than the last.
 
-- [ ] way to chain attacks
-- [x] attack on space bar key
-- [x] air vs ground attack
-- [x] slam attack
-- [ ] roll (double-tap down button)
-- [ ] walking with sword out animation
-- [ ] getting up after slide animation priority
-- [x] game start with character on idle
-- [x] hit animation
-- [x] enemy death animation
-- [x] player death animation
-- [x] randomise animations / movements for enemies
-- [x] make enemies attack when in range
-- [x] ground enemies attack once or have delay
-- [x] sword attack sounds
-- [x] slam attack sound
-- [x] define hitboxes for player attacks
-- [x] player attack detection
-- [x] Game Over screen
-- [x] game start screen
-- [x] collision animation
-- [x] change debug mode key binding
-- [x] Find alternate way to add svg icons and use js to update dynamically
-- [x] increase difficulty as score increases
-- [x] Stop all hit detection and collision detection when player is dead
-- [x] Fix restart button
-- [x] Enemy death sounds
+![ezgif com-gif-maker](https://github.com/tsv-stacks/forest-runner/assets/113384739/4e0c5f80-efd4-4fd1-a13f-767132390747)
 
 ## Future Features
 
@@ -105,7 +85,7 @@ This game was built over a period of six weeks, building on everything I created
 - [ ] Game Over Screen Music
 - [x] Mute button
 - [x] UI Sounds
-- [ ] Background music
+- [x] Background music
 - [ ] Better Enemy 'AI'
 
 ## Credits
@@ -127,3 +107,5 @@ If you encounter any issues or bugs, or have any suggestions for improving this 
 You can also submit an issue on this repository to report any bugs or suggest new features. Please provide as much detail as possible, including any error messages and steps to reproduce the issue.
 
 ## License
+
+This project is licensed under the terms of the MIT license.
