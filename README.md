@@ -96,7 +96,8 @@ This game was built over a period of six weeks, building on everything I created
 - [x] Find alternate way to add svg icons and use js to update dynamically
 - [x] increase difficulty as score increases
 - [x] Stop all hit detection and collision detection when player is dead
-- [ ] Fix restart button
+- [x] Fix restart button
+- [x] Enemy death sounds
 
 ## Future Features
 
@@ -114,6 +115,10 @@ This game was built over a period of six weeks, building on everything I created
 - Enemies created by [LuizMelo](https://luizmelo.itch.io/monsters-creatures-fantasy)
 - UI Sounds created by [Ellr](https://ellr.itch.io/universal-ui-soundpack)
 - Player Sounds created by [Darkworld Audio](https://darkworldaudio.itch.io/sound-effects-survival-i)
+- Attack Sound Effect by <a href="https://pixabay.com/users/666herohero-25759907/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=131480">666HeroHero</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=131480">Pixabay</a>
+- Attack Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=37027">Pixabay</a>
+- Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6982">Pixabay</a>
+- Music by <a href="https://pixabay.com/users/soundgalleryby-21339672/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">SoundGalleryBy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">Pixabay</a>
 
 ## Contact me
 
