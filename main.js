@@ -131,6 +131,19 @@ window.addEventListener("load", () => {
       document.getElementById("btn-container").style.top = "53%";
     }
 
+    music() {
+      const bGMusic = new Audio();
+      if (!game.muted && this.gameover) {
+        bGMusic.volume = 0.5;
+        bGMusic.play();
+      } else if (!game.muted && !this.gameover) {
+        bGMusic.volume = 1;
+        bGMusic.play();
+      } else {
+        return;
+      }
+    }
+
     restart() {
       if (!game.muted) gameStartSound.play();
       this.player.reset();
@@ -143,6 +156,7 @@ window.addEventListener("load", () => {
         "none";
       document.getElementById("btn-container").style.top = "93%";
       this.enemies = [];
+      this.gameover = false;
     }
   }
 
