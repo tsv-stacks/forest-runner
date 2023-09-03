@@ -118,10 +118,7 @@ This game was built over a period of six weeks, building on everything I created
 - Attack Sound Effect by <a href="https://pixabay.com/users/666herohero-25759907/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=131480">666HeroHero</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=131480">Pixabay</a>
 - Attack Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=37027">Pixabay</a>
 - Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6982">Pixabay</a>
-
-Music by <a href="https://pixabay.com/users/soundgalleryby-21339672/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">SoundGalleryBy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">Pixabay</a>
-
-Music by <a href="https://pixabay.com/users/musictown-25873992/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=103662">Musictown</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=103662">Pixabay</a>
+- Music by <a href="https://pixabay.com/users/soundgalleryby-21339672/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">SoundGalleryBy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117935">Pixabay</a>
 
 ## Contact me
 
